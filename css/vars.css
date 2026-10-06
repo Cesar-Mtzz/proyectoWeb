@@ -1,0 +1,14 @@
+/* En este archivo se encuentran las variables para colores y la importación de fuentes para la web */
+
+/* Importar fuende desde google */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=PT+Serif+Caption:ital@0;1&display=swap');
+
+:root {
+    --bg-color: #1e222a; /* Color para el fondo general*/
+    --bg-sec:   #5b6376; /* Color para el fondo de los elementos */
+
+    --acento:   #81a1c1; /* Color de acento*/
+    --acento-2: #5e81ac; /* Color de acento 2*/
+
+    --fc-color: #d8dee9; /* Color para la letra*/
+}
