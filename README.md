@@ -56,7 +56,7 @@ El prototipo cuenta con las pantallas principales interconectadas mediante rutas
 
 
 7. Pasos para Probar el Proyecto Localmente
-link =
+link = https://cesar-mtzz.github.io/proyectoWeb/
 
 
 8. Credenciales de Prueba (Demostración)
