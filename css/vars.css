@@ -5,16 +5,19 @@
 
 :root {
     /* Colores */
-    --bg-color: #1e222a; /* Color para el fondo general*/
+    --bg-color: #1e222a; /* Color para el fondo general */
     --bg-sec:   #5b6376; /* Color para el fondo de los elementos */
 
-    --acento:   #81a1c1; /* Color de acento*/
-    --acento-2: #5e81ac; /* Color de acento 2*/
+    --acento:   #81a1c1; /* Color de acento */
+    --acento-2: #5e81ac; /* Color de acento 2 */
 
-    --fc-color: #d8dee9; /* Color para la letra*/
+    --rojo:     #bf616a; /* Color rojo para el tema */
+
+    --fc-color: #d8dee9; /* Color para la letra */
+    --fc-dark:  #1e222a; /* Color para la letra obscuro */
 
     /* Tamaños */
     --rb-cont:     2rem; /* Bordes para el contenedor general */
     
-    --letrasMenu:  2rem; /* Tamaño de las letras para el menu */
+    --letrasMenu:  1.75rem; /* Tamaño de las letras para el menu */
 }

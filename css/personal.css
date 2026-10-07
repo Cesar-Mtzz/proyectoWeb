@@ -1,0 +1,89 @@
+/* En este archivo se encuentra el diseño del dashboard */
+
+#contenido {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: 1fr;
+    align-items: center;
+    justify-items: center;
+    width: 90%;
+    height: 90%;
+}
+
+#dashboard .tarjeta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 95%;
+    height: 75%;
+    background-color: var(--acento);
+    border-radius: var(--rb-cont);
+    color: var(--fc-dark);
+    overflow: hidden;
+}
+
+#dashboard .tarjeta * {
+    width: 90%;
+}
+
+#dashboard .tarjeta span {
+   margin-bottom: .5rem; 
+}
+
+#dashboard .tarjeta img {
+    width: 4rem;
+    padding: .5rem;
+    background-color: var(--fc-color);
+    border-radius: var(--rb-cont);
+}
+
+#dashboard .tarjeta h1 {
+    height: 25%;
+    font-size: 3rem;
+}
+
+#dashboard .tarjeta p {
+    margin: .5rem 0;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+#dashboard .tarjeta .capacitacion {
+    background-color: var(--rojo);
+    color: var(--fc-color);
+    margin: 0;
+    padding: .5rem 1rem;
+    border-radius: var(--rb-cont);
+    font-size: 2rem;
+    font-weight: normal;
+    text-align: center;
+}
+
+#dashboard .tarjeta .gerente {
+    background-color: var(--bg-color);
+    color: var(--fc-color);
+    margin: 0;
+    padding: .5rem 1rem;
+    border-radius: var(--rb-cont);
+    font-size: 2rem;
+    font-weight: normal;
+    text-align: center;
+}
+
+#dashboard .tarjeta .vacio {
+    background-color: transparent;
+    color: transparent;
+    margin: 0;
+    padding: .5rem 1rem;
+    border-radius: var(--rb-cont);
+    font-size: 2rem;
+    font-weight: normal;
+    text-align: center;
+}
