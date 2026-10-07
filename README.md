@@ -38,8 +38,11 @@ El prototipo cuenta con las pantallas principales interconectadas mediante rutas
 5. catalogo.html / menu.html: Menú de productos organizados por categorías (cafés, repostería, etc.).
 6. personal.html: Control y listado de la base de trabajadores.
 
+5. Mapa de Navegación
+![Texto alternativo](/imagenes/Captura%20de%20pantalla%202026-10-07%20a%20la(s)%207.48.38.png)
 
-5. Matriz de Trazabilidad (Requerimientos vs. Pantallas)
+
+6. Matriz de Trazabilidad (Requerimientos vs. Pantallas)
 
 | ID | Requerimiento (RF / RNF) | Vista / Archivo | Componentes y Funcionalidad |
 | :--- | :--- | :--- | :--- |
@@ -52,11 +55,11 @@ El prototipo cuenta con las pantallas principales interconectadas mediante rutas
 | RNF5 | Diseño responsivo y adaptativo | Todas las vistas (.html) | Adaptación de la interfaz mediante CSS para móvil, tablet y escritorio. |
 
 
-6. Pasos para Probar el Proyecto Localmente
+7. Pasos para Probar el Proyecto Localmente
 link =
 
 
-7. Credenciales de Prueba (Demostración)
+8. Credenciales de Prueba (Demostración)
 - Administrador / Jefe: jefe@cafeteria.com / 123456
 - Empleado: empleado@cafeteria.com / 123456
 - Cliente: cliente@cafeteria.com / 123456
