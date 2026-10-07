@@ -15,7 +15,7 @@
     <section id="inicio">
         <h1>Iniciar Sesión</h1>
 
-        <form action="/login" method="POST" id="formulario">
+        <form id="formulario">
             <div class="campo">
                 <label for="nombre">Nombre de usuario</label>
                 <input type="text" id="nombre" name="nombre" required placeholder="Usuario: e.j. Cesar Martínez">
@@ -28,7 +28,7 @@
             
             <p> No tienes una cuenta?, <a href="registro.html">Registrate</a> aquí</p>
 
-            <button type="submit" formaction="inicio.html">Ingresar</button>
+            <button type="submit" onclick="window.location.href='inicio.html'">Ingresar</button>
         </form>
     </section>
 
