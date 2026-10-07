@@ -31,18 +31,18 @@ Con esta plataforma buscamos solucionar esto:
 4. Estructura de Vistas y Navegación
 El prototipo cuenta con las pantallas principales interconectadas mediante rutas relativas:
 
-1. index.html: Página de inicio (Landing page) con buscador y presentación general.
-2. login.html: Pantalla de acceso para clientes, empleados y administrador.
-3. registro.html: Formulario para la creación de cuentas de nuevos clientes.
-4. dashboard.html: Panel de control según el rol de usuario (resumen de ventas, accesos rápidos).
-5. catalogo.html / menu.html: Menú de productos organizados por categorías (cafés, repostería, etc.).
-6. personal.html: Control y listado de la base de trabajadores.
+- index.html: Página de inicio (Landing page) con buscador y presentación general.
+-  login.html: Pantalla de acceso para clientes, empleados y administrador.
+-   registro.html: Formulario para la creación de cuentas de nuevos clientes.
+-   dashboard.html: Panel de control según el rol de usuario (resumen de ventas, accesos rápidos).
+-   catalogo.html / menu.html: Menú de productos organizados por categorías (cafés, repostería, etc.).
+-    personal.html: Control y listado de la base de trabajadores.
 
 5. Mapa de Navegación
-![Texto alternativo](/imagenes/Captura%20de%20pantalla%202026-10-07%20a%20la(s)%207.48.38.png)
+- ![Texto alternativo](/imagenes/Captura%20de%20pantalla%202026-10-07%20a%20la(s)%207.48.38.png)
 
 
-6. Matriz de Trazabilidad (Requerimientos vs. Pantallas)
+7. Matriz de Trazabilidad (Requerimientos vs. Pantallas)
 
 | ID | Requerimiento (RF / RNF) | Vista / Archivo | Componentes y Funcionalidad |
 | :--- | :--- | :--- | :--- |
