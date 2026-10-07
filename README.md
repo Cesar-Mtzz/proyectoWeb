@@ -42,7 +42,7 @@ El prototipo cuenta con las pantallas principales interconectadas mediante rutas
 - ![Texto alternativo](/imagenes/Captura%20de%20pantalla%202026-10-07%20a%20la(s)%207.48.38.png)
 
 
-7. Matriz de Trazabilidad (Requerimientos vs. Pantallas)
+6. Matriz de Trazabilidad (Requerimientos vs. Pantallas)
 
 | ID | Requerimiento (RF / RNF) | Vista / Archivo | Componentes y Funcionalidad |
 | :--- | :--- | :--- | :--- |
