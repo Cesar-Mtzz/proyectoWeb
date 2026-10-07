@@ -1,0 +1,169 @@
+#contedorGeneral {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex: 1; 
+}
+
+#contedorGeneral {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex: 1; 
+}
+
+#contenido {
+    padding: 2rem;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.buscador-contenedor input {
+    font-size: 1.4rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 1.5rem;
+    border: none;
+    outline: none;
+}
+
+#buscador {
+    background-color: var(--bg-sec);
+    color: var(--fc-color);
+    padding: 0.5rem;
+    border-radius: 1.5rem;
+    text-align: center;
+    width: 500px;
+    margin-top: 0.5rem;
+}
+
+#banner-bienvenida {
+    background-color: var(--bg-sec);
+    color: var(--fc-color);
+    padding: 3rem;
+    border-radius: 1.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+#banner-bienvenida h1 {
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+}
+
+#banner-bienvenida p {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+}
+
+#banner-bienvenida button {
+    background-color: var(--acento);
+    color: var(--bg-color);
+    border: none;
+    padding: 0.8rem 2rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: ease-in-out .3s;
+}
+
+#banner-bienvenida button:hover {
+    background-color: var(--acento-2);
+    color: var(--fc-color);
+}
+
+.titulo-seccion {
+    font-size: 1.8rem;
+    color: var(--fc-color);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+#tarjetas-categorias {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.tarjeta {
+    background-color: var(--bg-sec);
+    color: var(--fc-color);
+    flex: 1;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tarjeta img {
+    width: 6rem;
+    height: 6rem;
+    background-color: var(--acento);
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+.tarjeta h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+}
+
+.tarjeta p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.tarjeta button {
+    background-color: var(--acento);
+    color: var(--bg-color);
+    border: none;
+    padding: 0.6rem 1.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: ease-in-out .3s;
+}
+
+.tarjeta button:hover {
+    background-color: var(--acento-2);
+    color: var(--fc-color);
+}
+
+footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--bg-sec);
+    padding: 1.5rem;
+}
+
+footer a {
+    font-size: var(--letrasMenu);
+    color: var(--fc-color);
+    text-decoration: none;
+    transition: ease-in-out .3s;
+    padding: 2.5rem;
+}
+
+footer a:hover {
+    color: var(--acento-2);
+    text-decoration: underline;
+}
+
+.btn-cuenta {
+    background-color: var(--acento);
+    color: var(--bg-color) !important;
+    padding: 0.5rem 1.5rem;
+    border-radius: 1rem;
+    font-weight: bold;
+}
+
+.btn-cuenta:hover {
+    background-color: var(--acento-2);
+    color: var(--fc-color) !important;
+    text-decoration: none !important;
+}
