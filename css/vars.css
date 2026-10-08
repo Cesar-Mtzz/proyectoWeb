@@ -4,17 +4,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=PT+Serif+Caption:ital@0;1&display=swap');
 
 :root {
-    /* Colores */
+    /* Colores principales */
         --bg-color: #2b2625;
+        /* Fondo general obscuro / café muy profundo */
         --bg-sec: #403735;
+        /* Fondo de contenedores principales (tarjetas, login) */
     
+        /* Colores de acento (Tonos café cálido y terracota/naranja) */
         --acento: #c88d51;
+        /* Color primario para botones e inputs */
         --acento-2: #8a5832;
+        /* Color secundario / bordes cálidos */
     
+        /* Color de alerta / acción */
         --rojo: #a04035;
+        /* Tono café rojizo para alertas o botones de énfasis */
     
+        /* Colores para texto */
         --fc-color: #e8ded5;
+        /* Texto claro para fondos obscuros */
         --fc-dark: #1e1816;
+        /* Texto obscuro para elementos contrastantes */
 
     /* Tamaños */
     --rb-cont:     2rem; /* Bordes para el contenedor general */
