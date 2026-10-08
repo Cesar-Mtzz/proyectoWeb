@@ -14,7 +14,7 @@
 
 /* --- Boton lateral --- */
 #btn-ajustes-lateral {
-    background-color: #cdd2d8;
+    background-color: var(--acento);
     padding: 1.2rem;
     display: flex;
     align-items: center;
@@ -38,7 +38,7 @@
 }
 
 .bloque, .bloque-chico {
-    background-color: #5b6376;
+    background-color:  var(--acento);
     display: flex;
     height: 7.5rem;
     cursor: pointer;
@@ -96,7 +96,7 @@ overflow: hidden;
 
 /* Boton de ajuste w */
 #btn-ajustes-lateral {
-    background-color: #5b6376;
+    background-color: var(--acento);
     border-left: none;
     border-bottom: none;
     padding: 1.2rem;
@@ -109,7 +109,7 @@ overflow: hidden;
     cursor: pointer;
     width: 100%;
     border-radius: 1.5rem;
-overflow: hidden;
+    overflow: hidden;
 }
 
 #btn-ajustes-lateral img {
@@ -119,5 +119,5 @@ overflow: hidden;
 #btn-ajustes-lateral:hover, 
 .bloque:hover, 
 .bloque-chico:hover {
-    background-color: #5e81ac;
+    background-color: var(--acento-2);
 }
