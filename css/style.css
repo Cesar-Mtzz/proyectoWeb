@@ -13,7 +13,7 @@
 
 html {
     font-family: "Inter", sans-serif; /* Fuente a usar en la web */
-    font-size: 10px; /* Tamaño base para usar rem */
+    font-size: var(--tFGeneral); /* Tamaño base para usar rem */
     background-color: #000; /* Fondo general */
     color: var(--fc-color);
 }

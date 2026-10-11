@@ -27,7 +27,13 @@
         /* Texto obscuro para elementos contrastantes */
 
     /* Tamaños */
-    --rb-cont:     2rem; /* Bordes para el contenedor general */
-    
-    --letrasMenu:  1.75rem; /* Tamaño de las letras para el menu */
+        --tFGeneral: 10px;
+        /* Tamaño de la fuente en general, para la etiqueta html en style.css */
+
+        --rb-cont:     2rem; 
+        /* Bordes para el contenedor general */
+        
+        --letrasMenu:  1.75rem; 
+        /* Tamaño de las letras para el menu */
+
 }

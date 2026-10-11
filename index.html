@@ -13,23 +13,25 @@
 <body>
 
     <section id="inicio">
-        <h1>Iniciar Sesión</h1>
+        <div id="box">
+            <h1>Iniciar Sesión</h1>
 
-        <form id="formulario">
-            <div class="campo">
-                <label for="nombre">Nombre de usuario</label>
-                <input type="text" id="nombre" name="nombre" required placeholder="Usuario: e.j. Cesar Martínez">
-            </div>
+            <form id="formulario">
+                <div class="campo">
+                    <label for="nombre">Nombre de usuario</label>
+                    <input type="text" id="nombre" name="nombre" required placeholder="Usuario: e.j. Cesar Martínez">
+                </div>
 
-            <div class="campo">
-                <label for="password">Contraseña</label>
-                <input type="password" id="pass" name="password" required placeholder="••••••••">
-            </div>
-            
-            <p> No tienes una cuenta?, <a href="html/registro.html">Registrate</a> aquí</p>
+                <div class="campo">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="pass" name="password" required placeholder="••••••••">
+                </div>
+                
+                <p> No tienes una cuenta?, <a href="html/registro.html">Registrate</a> aquí</p>
 
-            <button type="submit" onclick="window.location.href='html/inicio.html'">Ingresar</button> 
-        </form>
+                <button type="submit" onclick="window.location.href='html/inicio.html'">Ingresar</button> 
+            </form>
+        </div>
     </section>
 
 </body>
