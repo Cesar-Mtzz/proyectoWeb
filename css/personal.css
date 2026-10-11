@@ -1,6 +1,7 @@
 /* En este archivo se encuentra el diseño del dashboard */
 
 #contenido {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,10 +18,10 @@
 }
 
 #dashboard .tarjeta {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-rows: 1fr 2fr 1fr 1fr;
     align-items: center;
-    flex-direction: column;
+    justify-items: center;
     width: 95%;
     height: 75%;
     background-color: var(--acento);
@@ -33,24 +34,68 @@
     width: 90%;
 }
 
-#dashboard .tarjeta span {
-   margin-bottom: .5rem; 
+#dashboard .tarjeta div {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
 }
 
-#dashboard .tarjeta img {
+#dashboard .tarjeta .iconPersona {
     width: 4rem;
+    margin: 2rem 0 0 2rem;
     padding: .5rem;
     background-color: var(--fc-color);
     border-radius: var(--rb-cont);
 }
 
+.noVisible {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.transicion {
+    opacity: 0;
+    visibility: visible;
+    transition: opacity .5s ease-in-out;
+}
+
+.transicion.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+#dashboard .tarjeta .btnEliminar {
+    width: auto;
+    margin: 2rem 0 0 2rem;
+    background-color: var(--rojo);
+    border-radius: var(--rb-cont);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: ease-in-out .5s;
+}
+
+#dashboard .tarjeta .btnEliminar:hover {
+    filter: brightness(0.9);
+    transition: ease-in-out .5s;
+}
+
+#dashboard .tarjeta .btnEliminar img {
+    width: 4rem;
+    height: 4rem;
+    padding: .5rem;
+}
+
 #dashboard .tarjeta h1 {
-    height: 25%;
+    height: 100%;
+    padding-top: 2rem;
     font-size: 3rem;
 }
 
 #dashboard .tarjeta p {
-    margin: .5rem 0;
     font-size: 2.5rem;
     font-weight: bold;
 }
@@ -78,12 +123,45 @@
 }
 
 #dashboard .tarjeta .vacio {
-    background-color: transparent;
-    color: transparent;
+    background-color: var(--acento-2);
+    color: var(--fc-color);
     margin: 0;
     padding: .5rem 1rem;
     border-radius: var(--rb-cont);
     font-size: 2rem;
     font-weight: normal;
     text-align: center;
+}
+
+#botoneraEditar {
+    position: absolute;
+    z-index: 999;
+    bottom: 3rem;
+    right: 3rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+#botoneraEditar button {
+    width: 4.5rem;
+    height: 4.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    border: none;
+    background-color: var(--acento);
+    cursor: pointer;
+    transition: ease-in-out .5s;
+}
+
+#botoneraEditar button img {
+    width: 2.5rem; 
+    height: 2.5rem; 
+}
+
+#botoneraEditar button:hover {
+    background-color: var(--acento-2);
+    transition: ease-in-out .5s;
 }
