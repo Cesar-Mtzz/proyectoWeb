@@ -7,16 +7,17 @@
     <meta name="viewport" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cafeteria Web</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel = "stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/fransepalabola.css">
 </head>
-<body>
+<body class="text-light">
 
     <header>
-        <nav>
+        <nav class="d-flex justify-content-between align-items-center px-4 py-2">
             <a href="" ><img src="../icons/na.svg" alt="logo"></img></a>
-            <input id="buscador" type="text" name="buscar" placeholder="Buscar...">
-            <div>
+            <input id="buscador" class="form-control w-50 mx-auto" type="text" name="buscar" placeholder="Buscar...">
+            <div class="d-flex gap-3">
                 <a href="inicio.html">Inicio</a>
                 <a href="ajustes.html">Ajustes</a>
                 <a href="catalogo.html">Explorar</a>
@@ -25,46 +26,46 @@
         </nav>
     </header>
 
-   <div id="contedorGeneral">
+   <div id="contedorGeneral" class="container-fluid my-5">
         
         <section id="contenido">
 
-            <article id="banner-bienvenida">
+            <article id="banner-bienvenida" class="p-5 rounded-4 text-center mb-4">
                 <h1>Descubre el Cafe perfecto para ti!</h1>
                 <p>Explora nuestra seleccion de granos, equipos y recetas artesanales</p>
-                <button type="button" class="btn-principal" onclick="window.location.href='catalogo.html'">Empezar a explorar</button>
+                <button type="button" class="btn btn-lg fw-bold" onclick="animarBoton(this); setTimeout(() => window.location.href='catalogo.html', 150);">Empezar a explorar</button>
             </article>
 
             <h2 class="titulo-seccion">Explora nuestras categorias:</h2>
 
             <div id="tarjetas-categorias">
 
-                <article class="tarjeta" onclick="window.location.href='dashboard.html';">
-                    <img src="../icons/na.svg" alt="Icono Café" width="50">
-                    <h3>Dashboard</h3>
-                    <p>Para acceder a esta funcion tendras que iniciar sesion como admin</p>
-                </article>
+            <article class="tarjeta" onclick="window.location.href='dashboard.html';">
+                <img src="../icons/na.svg" alt="Icono Café" width="50">
+                <h3>Dashboard</h3>
+                <p>Para acceder a esta funcion tendras que iniciar sesion como admin</p>
+            </article>
 
-                <article class="tarjeta" onclick="window.location.href='catalogo.html';">
-                    <img src="../icons/na.svg" alt="Icono Café" width="50">
-                    <h3>Catalogo</h3>
-                    <p>Aqui encontraras todos nuestros productos, recetas y equipos</p>
-                </article>
+            <article class="tarjeta" onclick="window.location.href='catalogo.html';">
+                <img src="../icons/na.svg" alt="Icono Café" width="50">
+                <h3>Catalogo</h3>
+                <p>Aqui encontraras todos nuestros productos, recetas y equipos</p>
+            </article>
 
-                <article class="tarjeta" onclick="window.location.href='personal.html';">
-                    <img src="../icons/na.svg" alt="Icono Café" width="50">
-                    <h3>Gestion del personal</h3>
-                    <p>Para acceder a esta funcion tendras que iniciar sesion como admin</p>
-                </article>
+            <article class="tarjeta" onclick="window.location.href='personal.html';">
+                <img src="../icons/na.svg" alt="Icono Café" width="50">
+                <h3>Gestion del personal</h3>
+                <p>Para acceder a esta funcion tendras que iniciar sesion como admin</p>
+            </article>
 
-            </div>
+</div>
 
         </section>
 
     </div>
 
-    <footer>
-        <div class="enlaces-footer">
+    <footer class="py-2 mt-2 border-top border-secondary">
+        <div class="d-flex justify-content-center gap-4">
             <a href="">Acerca de Nosotros</a>
             <a href="">Contacto</a>
             <a href="">Terminos y condiciones</a>
@@ -72,5 +73,8 @@
         </div>
     </footer>
 
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/inicio.js"></script>
 </body>
 </html>

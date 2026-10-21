@@ -1,3 +1,8 @@
+body {
+    background-color: var(--bg-dark) !important;
+    color: var(--fc-color) !important;
+}
+
 #contedorGeneral {
     display: flex;
     flex-direction: row;
@@ -81,15 +86,16 @@
 
 #tarjetas-categorias {
     display: flex;
-    justify-content: space-between;
-    gap: 2rem;
+    justify-content: center;
+    gap: 10rem;
 }
 
 .tarjeta {
     background-color: var(--bg-sec);
     color: var(--fc-color);
     flex: 1;
-    padding: 2rem;
+    width: 300px;
+    padding: 1.5rem;
     border-radius: 1.5rem;
     text-align: center;
     display: flex;
