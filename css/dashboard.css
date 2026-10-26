@@ -89,47 +89,51 @@
     width: 95%;
     height: 75%;
     background-color: var(--acento);
-    border-radius: var(--rb-cont);
     color: var(--fc-dark);
+    border: none;
+    border-radius: var(--rb-cont);
     overflow: hidden;
 }
 
 .grafica-barras {
-  display: flex;
-  align-items: flex-end;
-  gap: 1rem;
-  width: 90%;
-  height: 90%;
-  padding: 1rem 1rem 2.5rem 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 1rem;
+    width: 90%;
+    height: 90%;
+    padding: 1rem 1rem 2.5rem;
 }
 
 .barra {
-  flex: 1;
-  height: var(--val); /* Consume el valor enviado desde HTML */
-  background-color: var(--bg-color);
-  border-radius: var(--rb-cont) var(--rb-cont) 0 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--fc-color);
-  transition: height 0.3s ease;
-  transition: ease-in-out .5s;
+    flex: 1;
+    min-width: 0;
+    height: var(--val);
+    background-color: var(--bg-color);
+    border-radius: var(--rb-cont) var(--rb-cont) 0 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    color: var(--fc-color);
+    transition: height 0.3s ease, background-color 0.5s ease;
 }
 
 .barra:hover {
-  background-color: var(--bg-sec);
-  transition: ease-in-out .5s;
+    background-color: var(--bg-sec);
 }
 
 .etiqueta {
-  font-size: 1.5rem;
-  padding-top: 0.25rem;
+    font-size: 1.5rem;
+    padding-top: 0.25rem;
 }
 
 .nombre {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: -2rem; /* Posiciona el texto debajo de la barra */
-  color: var(--bg-color);
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: -2rem;
+    color: var(--bg-color);
 }
