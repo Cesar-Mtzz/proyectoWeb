@@ -1,175 +1,181 @@
 body {
-    background-color: var(--bg-dark) !important;
+    background-color: var(--bg-color) !important;
     color: var(--fc-color) !important;
-}
-
-#contedorGeneral {
+    min-height: 100vh;
     display: flex;
-    flex-direction: row;
-    width: 100%;
-    flex: 1; 
+    flex-direction: column;
 }
 
-#contedorGeneral {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    flex: 1; 
+header {
+    padding: 0.7rem 1.5rem;
 }
 
-#contenido {
-    padding: 2rem;
-    box-sizing: border-box;
-    overflow-y: auto;
+header nav {
+    background-color: var(--bg-sec);
+    border-radius: 1.2rem;
+    padding: 0.4rem 1.5rem;
+    gap: 1rem;
 }
 
-.buscador-contenedor input {
-    font-size: 1.4rem;
-    padding: 0.5rem 1.5rem;
-    border-radius: 1.5rem;
-    border: none;
-    outline: none;
+header nav img {
+    width: 3.4rem;
+    height: 3.4rem;
+    padding: 0.3rem;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: var(--acento);
+}
+
+header nav img:hover {
+    background-color: var(--acento-2);
 }
 
 #buscador {
-    background-color: var(--bg-sec);
+    background-color: var(--bg-color);
     color: var(--fc-color);
-    padding: 0.5rem;
-    border-radius: 1.5rem;
-    text-align: center;
-    width: 500px;
-    margin-top: 0.5rem;
+    font-size: 1rem;
+    padding: 0.45rem 1.2rem;
+    border-radius: 1.2rem;
+    border: 1px solid var(--acento-2);
+    width: 100%;
+    max-width: 340px;
+}
+
+#buscador::placeholder {
+    color: var(--fc-color);
+    opacity: 0.65;
+}
+
+#buscador:focus {
+    outline: none;
+    border-color: var(--acento);
+}
+
+#contedorGeneral {
+    flex: 1;
+}
+
+#contenido {
+    padding: 1rem 1.5rem 1.5rem 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 #banner-bienvenida {
     background-color: var(--bg-sec);
     color: var(--fc-color);
-    padding: 3rem;
-    border-radius: 1.5rem;
+    padding: 1.8rem 1.5rem;
+    border-radius: 1.2rem;
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 #banner-bienvenida h1 {
-    font-size: 2.4rem;
-    margin-bottom: 1rem;
+    font-size: 1.65rem;
+    margin-bottom: 0.5rem;
 }
 
 #banner-bienvenida p {
-    font-size: 1.4rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+    margin-bottom: 1.1rem;
 }
 
-#banner-bienvenida button {
+#banner-bienvenida button,
+.tarjeta button,
+.btn-cuenta {
     background-color: var(--acento);
-    color: var(--bg-color);
+    color: var(--bg-color) !important;
     border: none;
-    padding: 0.8rem 2rem;
-    font-size: 1.4rem;
+    padding: 0.5rem 1.3rem;
+    font-size: 0.95rem;
     font-weight: bold;
-    border-radius: 1rem;
+    border-radius: 0.8rem;
     cursor: pointer;
-    transition: ease-in-out .3s;
 }
 
-#banner-bienvenida button:hover {
+#banner-bienvenida button:hover,
+.tarjeta button:hover,
+.btn-cuenta:hover {
     background-color: var(--acento-2);
-    color: var(--fc-color);
+    color: var(--fc-color) !important;
 }
 
 .titulo-seccion {
-    font-size: 1.8rem;
-    color: var(--fc-color);
+    font-size: 1.3rem;
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1.2rem;
 }
 
 #tarjetas-categorias {
     display: flex;
-    justify-content: center;
-    gap: 10rem;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .tarjeta {
     background-color: var(--bg-sec);
     color: var(--fc-color);
     flex: 1;
-    width: 300px;
-    padding: 1.5rem;
-    border-radius: 1.5rem;
+    min-width: 0;
+    padding: 1.5rem 1.2rem;
+    border-radius: 1.2rem;
+    border: 1px solid transparent;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.tarjeta:hover {
+    border-color: var(--acento);
 }
 
 .tarjeta img {
-    width: 6rem;
-    height: 6rem;
+    width: 4.2rem;
+    height: 4.2rem;
+    padding: 0.9rem;
+    object-fit: contain;
     background-color: var(--acento);
     border-radius: 50%;
-    margin-bottom: 1rem;
+    margin-bottom: 0.9rem;
+}
+
+.tarjeta:hover img {
+    background-color: var(--acento-2);
 }
 
 .tarjeta h3 {
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
 }
 
 .tarjeta p {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-}
-
-.tarjeta button {
-    background-color: var(--acento);
-    color: var(--bg-color);
-    border: none;
-    padding: 0.6rem 1.5rem;
-    font-size: 1.2rem;
-    font-weight: bold;
-    border-radius: 1rem;
-    cursor: pointer;
-    transition: ease-in-out .3s;
-}
-
-.tarjeta button:hover {
-    background-color: var(--acento-2);
-    color: var(--fc-color);
+    font-size: 0.95rem;
+    line-height: 1.35;
+    margin-bottom: 0;
 }
 
 footer {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
     background-color: var(--bg-sec);
-    padding: 1.5rem;
+    padding: 0.9rem 1.5rem;
 }
 
 footer a {
-    font-size: var(--letrasMenu);
+    font-size: 0.95rem;
     color: var(--fc-color);
     text-decoration: none;
-    transition: ease-in-out .3s;
-    padding: 2.5rem;
+    padding: 0.4rem 1.2rem;
 }
 
 footer a:hover {
     color: var(--acento-2);
     text-decoration: underline;
-}
-
-.btn-cuenta {
-    background-color: var(--acento);
-    color: var(--bg-color) !important;
-    padding: 0.5rem 1.5rem;
-    border-radius: 1rem;
-    font-weight: bold;
-}
-
-.btn-cuenta:hover {
-    background-color: var(--acento-2);
-    color: var(--fc-color) !important;
-    text-decoration: none !important;
 }

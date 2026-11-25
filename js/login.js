@@ -1,8 +1,3 @@
-// ! No modificar si no entienden que hace, mejor preguntar a alguie o apoyarse con una IA !
-
-// ==============================
-// Clase Usuario
-// ==============================
 class User {
     constructor(nombre, usuario, contraseña, rol, correo = "", telefono = "") {
         this.nombre = nombre;
@@ -14,30 +9,67 @@ class User {
     }
 }
 
-// ==============================
-// Usuarios predeterminados
-// ==============================
+const ROLES_VALIDOS = ["cliente", "jefe", "admin", "trabajador"];
+
+const INICIO_POR_ROL = {
+    cliente: "catalogo.html",
+    jefe: "inicio.html",
+    admin: "inicio.html",
+    trabajador: "inicio.html"
+};
+
 const usuariosIniciales = [
+    new User("Sofía Mendoza", "cliente", "cliente123", "cliente"),
+    new User("Roberto Navarro", "jefe", "jefe123", "jefe"),
     new User("Carlos Ramírez", "admin", "admin123", "admin"),
-    new User("Mariana Torres", "gerente", "gerente123", "gerente"),
-    new User("Luis Hernández", "empleado", "empleado123", "empleado")
+    new User("Luis Hernández", "trabajador", "trabajador123", "trabajador")
 ];
 
-// ==============================
-// Inicializar usuarios
-// ==============================
-function inicializarUsuarios() {
-    let usuarios = JSON.parse(localStorage.getItem("usuarios"));
+function obtenerRutaBase() {
+    return window.location.pathname.includes("/html/") ? "../" : "./";
+}
 
-    if (!usuarios) {
-        usuarios = usuariosIniciales;
+function obtenerDestinoPorRol(rol) {
+    const normalizado = (rol || "").toLowerCase().trim();
+    return INICIO_POR_ROL[normalizado] || "inicio.html";
+}
+
+function irAInicio() {
+    const sesion = obtenerUsuarioSesion();
+    const rol = sesion ? (sesion.rol || "").toLowerCase().trim() : "cliente";
+    const destino = obtenerDestinoPorRol(rol);
+
+    if (window.location.pathname.includes("/html/")) {
+        window.location.href = destino;
+    } else {
+        window.location.href = `html/${destino}`;
+    }
+}
+
+function inicializarUsuarios(forzarReinicio = false) {
+    let usuarios = null;
+
+    if (!forzarReinicio) {
+        try {
+            usuarios = JSON.parse(localStorage.getItem("usuarios"));
+        } catch {
+            usuarios = null;
+        }
+    }
+
+    const tieneLosCuatro =
+        Array.isArray(usuarios) &&
+        usuarios.some(u => (u.usuario || "").toLowerCase() === "cliente") &&
+        usuarios.some(u => (u.usuario || "").toLowerCase() === "jefe") &&
+        usuarios.some(u => (u.usuario || "").toLowerCase() === "admin") &&
+        usuarios.some(u => (u.usuario || "").toLowerCase() === "trabajador");
+
+    if (!tieneLosCuatro || forzarReinicio) {
+        usuarios = usuariosIniciales.slice();
         localStorage.setItem("usuarios", JSON.stringify(usuarios));
     }
 }
 
-// ==============================
-// Crear usuario
-// ==============================
 function crearUsuario(e) {
     e.preventDefault();
 
@@ -47,11 +79,11 @@ function crearUsuario(e) {
     const telefono = document.getElementById("telefono").value.trim();
     const contraseña = document.getElementById("password").value;
 
+    inicializarUsuarios(false);
     let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
-    // Comprobar si el nombre de usuario ya existe
     const existe = usuarios.some(
-        u => u.usuario.toLowerCase() === usuario.toLowerCase()
+        u => (u.usuario || "").toLowerCase() === usuario.toLowerCase()
     );
 
     if (existe) {
@@ -59,93 +91,86 @@ function crearUsuario(e) {
         return;
     }
 
-    // Todo registro nuevo tendrá el rol usuario
     const nuevoUsuario = new User(
         nombre,
         usuario,
         contraseña,
-        "usuario",
+        "cliente",
         correo,
         telefono
     );
 
     usuarios.push(nuevoUsuario);
-
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
     alert("Usuario registrado correctamente.");
-
-    window.location.href = "../index.html";
+    window.location.href = `${obtenerRutaBase()}index.html`;
 }
 
-// ==============================
-// Iniciar sesión
-// ==============================
 function iniciarSesion(e) {
     e.preventDefault();
 
-    const usuario = document.getElementById("usuario").value.trim();
-    const contraseña = document.getElementById("password").value;
+    inicializarUsuarios(false);
 
+    const usuarioInput = document.getElementById("usuario");
+    const passwordInput = document.getElementById("password");
     const errorMsg = document.getElementById("errorMsg");
 
-    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+    const usuarioIngresado = usuarioInput ? usuarioInput.value.trim().toLowerCase() : "";
+    const passwordIngresado = passwordInput ? passwordInput.value : "";
 
-    const usuarioEncontrado = usuarios.find(
-        u => u.usuario.toLowerCase() === usuario.toLowerCase()
-        && u.contraseña === contraseña
+    let usuarios = [];
+    try {
+        usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+    } catch {
+        usuarios = [];
+    }
+
+    let usuarioEncontrado = usuarios.find(
+        u => (u.usuario || "").toLowerCase() === usuarioIngresado
+        && u.contraseña === passwordIngresado
     );
 
-    if (usuarioEncontrado) {
-        errorMsg.hidden = true;
-
-        sessionStorage.setItem(
-            "sesionActiva",
-            JSON.stringify(usuarioEncontrado)
+    if (!usuarioEncontrado) {
+        usuarioEncontrado = usuariosIniciales.find(
+            u => u.usuario.toLowerCase() === usuarioIngresado
+            && u.contraseña === passwordIngresado
         );
+    }
 
-        window.location.href = "./html/inicio.html";
-
-    } else {
+    if (usuarioEncontrado) {
+        if (errorMsg) errorMsg.hidden = true;
+        sessionStorage.setItem("sesionActiva", JSON.stringify(usuarioEncontrado));
+        irAInicio();
+    } else if (errorMsg) {
         errorMsg.hidden = false;
     }
 }
 
-// ==============================
-// Obtener rol del usuario actual
-// ==============================
 function obtenerRol() {
-    const sesion = JSON.parse(sessionStorage.getItem("sesionActiva"));
-
-    return sesion ? sesion.rol : null;
+    const sesion = obtenerUsuarioSesion();
+    return sesion && sesion.rol ? String(sesion.rol).toLowerCase().trim() : null;
 }
 
-// ==============================
-// Obtener usuario de la sesión
-// ==============================
 function obtenerUsuarioSesion() {
-    return JSON.parse(sessionStorage.getItem("sesionActiva"));
-}
-
-// ==============================
-// Comprobar sesión activa
-// ==============================
-function saltarLoginSiAutenticado() {
-    const sesion = sessionStorage.getItem("sesionActiva");
-
-    if (sesion) {
-        window.location.href = "./html/inicio.html";
+    try {
+        return JSON.parse(sessionStorage.getItem("sesionActiva"));
+    } catch {
+        return null;
     }
 }
 
-// ==============================
-// Cerrar sesión
-// ==============================
-function cerrarSesion() {
-    sessionStorage.removeItem("sesionActiva");
-
-    window.location.href = "../index.html";
+function saltarLoginSiAutenticado() {
+    const sesion = obtenerUsuarioSesion();
+    if (sesion && sesion.rol) {
+        irAInicio();
+    }
 }
 
-// Inicialización
-inicializarUsuarios();
+function cerrarSesion() {
+    sessionStorage.removeItem("sesionActiva");
+    localStorage.removeItem("rolUsuario");
+    window.location.href = `${obtenerRutaBase()}index.html`;
+}
+
+inicializarUsuarios(false);

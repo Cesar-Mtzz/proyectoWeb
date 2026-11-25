@@ -1,78 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="">
     <meta name="description" content="">
-    <meta name="viewport" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cafeteria Web</title>
-    <link rel = "stylesheet" href="../css/style.css">
+    <title>Cafeteria Web - Ajustes</title>
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/ajustesEstilo.css">
 </head>
 <body>
 
     <header>
         <nav>
-            <a href="" ><img src="../icons/na.svg" alt=""></img></a>
+            <a href="../index.html"><img src="../icons/logo.svg" alt="Logo"></a>
             <div>
                 <a href="inicio.html">Inicio</a>
                 <a href="ajustes.html">Ajustes</a>
                 <a href="catalogo.html">Explorar</a>
-                <a href="../index.html">Cerrar Sesión</a>
+                <a href="../index.html" id="btnCerrarSesion">Cerrar Sesión</a>
             </div>
         </nav>
     </header>
 
     <div id="contedorGeneral">
 
-        <section id="menu-horizontal">
-            <button id="btn-ajustes-lateral" onclick="window.location.href='ajustes.html'">
-        <img src="../imagenes/ruedajustes.png"> Ajustes
-    </button>
-        </section>
-        
         <section id="contenido">
             <div class="pantalla-ajustes">
-    
-    <div class="menu-bloques">
-        <button class="bloque">
-            <div class="icono"><img src="../imagenes/ruedajustes.png"></div>
-            <div class="texto">Iniciar sesion de Administrador</div>
-        </button>
-        
-        <button class="bloque">
-            <div class="icono"><img src="../imagenes/grafica.png"></div>
-            <div class="texto">Historial de compras</div>
-        </button>
 
-        <button class="bloque">
-            <div class="icono"><img src="../imagenes/soporte.png"></div>
-            <div class="texto">Soporte tecnico</div>
-        </button>
+                <div class="menu-bloques">
+                    <button type="button" id="btnLoginAdmin" class="bloque">
+                        <div class="icono"><img src="../imagenes/ruedajustes.png" alt=""></div>
+                        <div class="texto">Iniciar sesion de Administrador</div>
+                    </button>
 
-        <button class="bloque">
-            <div class="icono"><img src="../imagenes/bolsatrabajo.png"></div>
-            <div class="texto">Bolsa de trabajo</div>
-        </button>
-    </div>
+                    <button type="button" id="btnHistorialCompras" class="bloque">
+                        <div class="icono"><img src="../imagenes/grafica.png" alt=""></div>
+                        <div class="texto">Historial de compras</div>
+                    </button>
 
-    <div class="botones-inferiores">
-        <button class="bloque-chico">
-            <div class="icono"><img src="../imagenes/perfil.png"></div>
-            <div class="texto">Administrar perfil</div>
-        </button>
+                    <button type="button" id="btnSoporteTecnico" class="bloque">
+                        <div class="icono"><img src="../imagenes/soporte.png" alt=""></div>
+                        <div class="texto">Soporte tecnico</div>
+                    </button>
 
-        <button class="bloque-chico" onclick="window.location.href='../index.html'">
-            <div class="icono"><img src="../imagenes/tache.png"></div>
-            <div class="texto">Cerrar sesion</div>
-        </button>
-    </div>
+                    <button type="button" id="btnBolsaTrabajo" class="bloque">
+                        <div class="icono"><img src="../imagenes/bolsatrabajo.png" alt=""></div>
+                        <div class="texto">Bolsa de trabajo</div>
+                    </button>
 
-</div>
+                    <button type="button" id="btnCuentaAjustes" class="bloque">
+                        <div class="icono"><img src="../imagenes/perfil.png" alt=""></div>
+                        <div class="texto">Cuenta</div>
+                    </button>
+                </div>
+
+                <div class="botones-inferiores">
+                    <button type="button" id="btnAdministrarPerfil" class="bloque-chico">
+                        <div class="icono"><img src="../imagenes/perfil.png" alt=""></div>
+                        <div class="texto">Administrar perfil</div>
+                    </button>
+
+                    <button type="button" id="btnCerrarSesionAjustes" class="bloque-chico">
+                        <div class="icono"><img src="../imagenes/tache.png" alt=""></div>
+                        <div class="texto">Cerrar sesion</div>
+                    </button>
+                </div>
+
+            </div>
         </section>
 
     </div>
+
+    <script src="../js/login.js"></script>
+    <script src="../js/roles.js"></script>
+    <script src="../js/ajustes.js"></script>
 
 </body>
 </html>
