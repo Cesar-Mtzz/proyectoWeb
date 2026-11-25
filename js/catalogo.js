@@ -19,8 +19,10 @@ const productosBase = [
     { name: 'Sandwich', category: 'salados', price: 62, description: 'Opción salada completa para desayunar o comer.', hechoDe: 'Pan, proteína, queso, vegetales frescos y aderezo.', img: '../icons/sandwich.svg' }
 ];
 
+const ESTILO_BTN_ELIMINAR = 'background:#ffffff; color:#140f0c; border:1px solid #d4a373; border-radius:6px; padding:4px 10px; font-weight:bold; cursor:pointer; opacity:1;';
+
 function esPaginaCatalogo() {
-    return (window.location.pathname || '').toLowerCase().endsWith('/catalogo.html');
+    return (window.location.pathname || '').toLowerCase().includes('catalogo.html');
 }
 
 function puedeGestionar() {
@@ -63,7 +65,7 @@ function abrirModal(item, idx) {
             <div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px;">
                 <strong>$${item.price} MXN</strong>
                 <div style="display:flex; gap:8px;">
-                    ${gestion ? `<button id="mEliminar" type="button">Eliminar</button>` : ''}
+                    ${gestion ? `<button id="mEliminar" type="button" style="${ESTILO_BTN_ELIMINAR}">Eliminar</button>` : ''}
                     <button id="mCerrar2" type="button">Cerrar</button>
                 </div>
             </div>
@@ -153,7 +155,7 @@ function pintarTarjetas(items) {
             <p><strong>$${item.price}</strong></p>
             <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-top:auto;">
                 <a href="#" class="ver-detalles">Más detalles</a>
-                ${gestion ? `<button type="button" class="btn-del">Eliminar</button>` : ''}
+                ${gestion ? `<button type="button" class="btn-del" style="${ESTILO_BTN_ELIMINAR}">Eliminar</button>` : ''}
             </div>
         `;
         card.onclick = e => {
