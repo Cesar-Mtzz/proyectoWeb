@@ -61,7 +61,7 @@ link = https://cesar-mtzz.github.io/proyectoWeb/
 
 8. Credenciales de Prueba (Demostración)
 "Usuario - Contraseña"
-cliente - cliente123
-trabajador - trabajador123
-admin - admin123
-jefe - jefe123
+- cliente - cliente123
+- trabajador - trabajador123
+- admin - admin123
+- jefe - jefe123
