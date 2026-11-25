@@ -1,4 +1,49 @@
-/* En este archivo se encuentra el diseño del dashboard */
+/* Diseño de la vista de personal */
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--bg-sec);
+    border-radius: var(--rb-cont);
+}
+
+header nav img {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 100%;
+    background-color: var(--acento);
+    object-fit: cover;
+}
+
+header nav #buscador {
+    width: 32rem;
+    max-width: 100%;
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background-color: var(--bg-color);
+    color: var(--fc-color);
+    font-size: 1.4rem;
+}
+
+header nav div {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: var(--letrasMenu);
+}
+
+header nav a {
+    color: var(--fc-color);
+    text-decoration: none;
+}
+
+header nav a:hover {
+    color: var(--acento-2);
+}
 
 #contenido {
     position: relative;
@@ -9,7 +54,7 @@
 
 #dashboard {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: 1fr;
     align-items: center;
     justify-items: center;
@@ -75,12 +120,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: ease-in-out .5s;
+    transition: .3s;
 }
 
 #dashboard .tarjeta .btnEliminar:hover {
     filter: brightness(0.9);
-    transition: ease-in-out .5s;
 }
 
 #dashboard .tarjeta .btnEliminar img {
@@ -100,8 +144,9 @@
     font-weight: bold;
 }
 
-#dashboard .tarjeta .capacitacion {
-    background-color: var(--rojo);
+#dashboard .tarjeta .capacitacion,
+#dashboard .tarjeta .gerente,
+#dashboard .tarjeta .vacio {
     color: var(--fc-color);
     margin: 0;
     padding: .5rem 1rem;
@@ -109,28 +154,18 @@
     font-size: 2rem;
     font-weight: normal;
     text-align: center;
+}
+
+#dashboard .tarjeta .capacitacion {
+    background-color: var(--rojo);
 }
 
 #dashboard .tarjeta .gerente {
     background-color: var(--bg-color);
-    color: var(--fc-color);
-    margin: 0;
-    padding: .5rem 1rem;
-    border-radius: var(--rb-cont);
-    font-size: 2rem;
-    font-weight: normal;
-    text-align: center;
 }
 
 #dashboard .tarjeta .vacio {
     background-color: var(--acento-2);
-    color: var(--fc-color);
-    margin: 0;
-    padding: .5rem 1rem;
-    border-radius: var(--rb-cont);
-    font-size: 2rem;
-    font-weight: normal;
-    text-align: center;
 }
 
 #botoneraEditar {
@@ -153,15 +188,14 @@
     border: none;
     background-color: var(--acento);
     cursor: pointer;
-    transition: ease-in-out .5s;
+    transition: .3s;
 }
 
 #botoneraEditar button img {
-    width: 2.5rem; 
-    height: 2.5rem; 
+    width: 2.5rem;
+    height: 2.5rem;
 }
 
 #botoneraEditar button:hover {
     background-color: var(--acento-2);
-    transition: ease-in-out .5s;
 }

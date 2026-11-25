@@ -19,17 +19,17 @@ const productosBase = [
     { name: 'Sandwich', category: 'salados', price: 62, description: 'Opción salada completa para desayunar o comer.', hechoDe: 'Pan, proteína, queso, vegetales frescos y aderezo.', img: '../icons/sandwich.svg' }
 ];
 
+function esPaginaCatalogo() {
+    return (window.location.pathname || '').toLowerCase().endsWith('/catalogo.html');
+}
+
 function puedeGestionar() {
     const sesion = JSON.parse(sessionStorage.getItem('sesionActiva') || 'null');
     const rol = (sesion?.rol || localStorage.getItem('rolUsuario') || '').toLowerCase();
     return ROLES_GESTION.includes(rol);
 }
 
-let productos = JSON.parse(localStorage.getItem('catalogoProductos') || 'null');
-if (!Array.isArray(productos) || !productos.length) {
-    productos = productosBase.slice();
-    localStorage.setItem('catalogoProductos', JSON.stringify(productos));
-}
+let productos = productosBase.slice();
 let filtroActual = 'todos';
 
 const modal = document.createElement('div');
@@ -39,8 +39,7 @@ document.body.appendChild(modal);
 const cerrarModal = () => modal.style.display = 'none';
 modal.onclick = e => { if (e.target === modal) cerrarModal(); };
 
-function guardarYRefrescar() {
-    localStorage.setItem('catalogoProductos', JSON.stringify(productos));
+function refrescarVista() {
     cerrarModal();
     filtrarCatalogo();
 }
@@ -48,24 +47,24 @@ function guardarYRefrescar() {
 function abrirModal(item, idx) {
     const gestion = puedeGestionar();
     modal.innerHTML = `
-        <div style="background:var(--bg-sec,#241b16); color:var(--fc-color,#fff); border:1px solid var(--acento-2,#d4a373); border-radius:10px; max-width:430px; width:100%; padding:16px;">
+        <div style="background:#241b16; color:#fff; border:1px solid #d4a373; border-radius:10px; max-width:430px; width:100%; padding:16px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
                 <div>
-                    <small style="color:var(--acento-2,#d4a373);">${item.category}</small>
+                    <small style="color:#d4a373;">${item.category}</small>
                     <h2 style="margin:0; font-size:20px;">${item.name}</h2>
                 </div>
-                <button id="mCerrar" type="button" style="background:none; color:inherit; border:1px solid rgba(255,255,255,0.2); border-radius:6px; cursor:pointer;">✕</button>
+                <button id="mCerrar" type="button">✕</button>
             </div>
-            <div style="background:var(--acento,#a67c52); border-radius:8px; padding:10px; margin-bottom:10px; display:flex; justify-content:center; height:130px;">
+            <div style="background:#a67c52; border-radius:8px; padding:10px; margin-bottom:10px; display:flex; justify-content:center; height:130px;">
                 <img src="${item.img}" alt="${item.name}" onerror="this.onerror=null;this.src='${IMG_RESPALDO}';" style="max-height:100%; object-fit:contain;">
             </div>
-            <p style="margin:0 0 8px 0;">${item.description}</p>
-            <p style="margin:0 0 12px 0;"><strong>De qué está hecho:</strong> ${item.hechoDe}</p>
-            <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
-                <strong style="font-size:17px; color:var(--acento-2,#d4a373);">$${item.price} MXN</strong>
+            <p>${item.description}</p>
+            <p><strong>De qué está hecho:</strong> ${item.hechoDe}</p>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px;">
+                <strong>$${item.price} MXN</strong>
                 <div style="display:flex; gap:8px;">
-                    ${gestion ? `<button id="mEliminar" type="button" style="background:#7f2323; color:#fff; border:none; border-radius:6px; padding:6px 12px; cursor:pointer;">Eliminar</button>` : ''}
-                    <button id="mCerrar2" type="button" style="background:var(--acento,#a67c52); color:var(--bg-color,#140f0c); border:none; border-radius:6px; padding:6px 12px; font-weight:bold; cursor:pointer;">Cerrar</button>
+                    ${gestion ? `<button id="mEliminar" type="button">Eliminar</button>` : ''}
+                    <button id="mCerrar2" type="button">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -75,18 +74,18 @@ function abrirModal(item, idx) {
     const btnDel = document.getElementById('mEliminar');
     if (btnDel) btnDel.onclick = () => {
         productos.splice(idx, 1);
-        guardarYRefrescar();
+        refrescarVista();
     };
     modal.style.display = 'flex';
 }
 
 function abrirModalSubir() {
-    if (!puedeGestionar()) return;
+    if (!esPaginaCatalogo() || !puedeGestionar()) return;
     modal.innerHTML = `
-        <div style="background:var(--bg-sec,#241b16); color:var(--fc-color,#fff); border:1px solid var(--acento-2,#d4a373); border-radius:10px; max-width:430px; width:100%; padding:16px;">
+        <div style="background:#241b16; color:#fff; border:1px solid #d4a373; border-radius:10px; max-width:430px; width:100%; padding:16px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
                 <h2 style="margin:0; font-size:18px;">Subir producto</h2>
-                <button id="mCerrarSub" type="button" style="background:none; color:inherit; border:1px solid rgba(255,255,255,0.2); border-radius:6px; cursor:pointer;">✕</button>
+                <button id="mCerrarSub" type="button">✕</button>
             </div>
             <form id="fSubir" style="display:flex; flex-direction:column; gap:8px;">
                 <label>Nombre</label>
@@ -126,7 +125,7 @@ function abrirModalSubir() {
             hechoDe: document.getElementById('npHecho').value.trim(),
             img: document.getElementById('npImg').value.trim() || IMG_RESPALDO
         });
-        guardarYRefrescar();
+        refrescarVista();
     };
     modal.style.display = 'flex';
 }
@@ -154,7 +153,7 @@ function pintarTarjetas(items) {
             <p><strong>$${item.price}</strong></p>
             <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-top:auto;">
                 <a href="#" class="ver-detalles">Más detalles</a>
-                ${gestion ? `<button type="button" class="btn-del" style="background:#7f2323; color:#fff; border:none; border-radius:6px; padding:4px 8px; font-size:12px; cursor:pointer;">Eliminar</button>` : ''}
+                ${gestion ? `<button type="button" class="btn-del">Eliminar</button>` : ''}
             </div>
         `;
         card.onclick = e => {
@@ -166,7 +165,7 @@ function pintarTarjetas(items) {
         if (btnDel) btnDel.onclick = e => {
             e.stopPropagation();
             productos.splice(idx, 1);
-            guardarYRefrescar();
+            refrescarVista();
         };
         contenedor.appendChild(card);
     });
@@ -181,12 +180,12 @@ function filtrarCatalogo() {
     pintarTarjetas(filtrados);
 }
 
-if (puedeGestionar() && !document.getElementById('btnSubirProducto')) {
+if (esPaginaCatalogo() && puedeGestionar() && !document.getElementById('btnSubirProducto')) {
     const btn = document.createElement('button');
     btn.id = 'btnSubirProducto';
     btn.type = 'button';
     btn.textContent = '+ Subir producto';
-    btn.style.cssText = 'position:fixed; right:20px; bottom:20px; z-index:9998; background:var(--acento,#a67c52); color:var(--bg-color,#140f0c); border:none; border-radius:8px; padding:10px 14px; font-weight:bold; cursor:pointer;';
+    btn.style.cssText = 'position:fixed; left:20px; bottom:20px; z-index:9998; background:#d4a373; color:#140f0c; border:none; border-radius:8px; padding:10px 14px; font-weight:bold; cursor:pointer;';
     btn.onclick = abrirModalSubir;
     document.body.appendChild(btn);
 }
