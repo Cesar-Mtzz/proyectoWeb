@@ -1,246 +1,134 @@
-const DESCRIPCION_CUENTA_AJUSTES = {
-    cliente: {
-        titulo: "Cliente",
-        detalle: "Puedes ver el catálogo, consultar detalles de productos y administrar tu perfil."
-    },
-    trabajador: {
-        titulo: "Trabajador",
-        detalle: "Puedes acceder a Inicio, Catálogo y Ajustes, así como subir y eliminar productos."
-    },
-    admin: {
-        titulo: "Administrador",
-        detalle: "Puedes acceder a Inicio, Catálogo, Ajustes y Personal, y gestionar productos del catálogo."
-    },
-    jefe: {
-        titulo: "Jefe",
-        detalle: "Tienes acceso completo a todas las secciones y módulos del sistema."
-    }
+const ROLES_INFO = {
+    cliente: { rol: "Cliente", texto: "Ver catálogo y editar perfil." },
+    trabajador: { rol: "Trabajador", texto: "Inicio, catálogo, ajustes y productos." },
+    admin: { rol: "Administrador", texto: "Inicio, catálogo, ajustes, personal y productos." },
+    jefe: { rol: "Jefe", texto: "Acceso completo al sistema." }
 };
 
-function obtenerSesionAjustes() {
-    if (typeof obtenerUsuarioSesion === "function") {
-        const u = obtenerUsuarioSesion();
-        if (u) return u;
-    }
-    try {
-        return JSON.parse(sessionStorage.getItem("sesionActiva"));
-    } catch {
-        return null;
-    }
-}
+let modal;
+const cerrarModal = () => { if (modal) modal.style.display = "none"; };
 
-function salirDesdeAjustes() {
-    if (typeof cerrarSesion === "function") {
-        cerrarSesion();
-    } else {
-        sessionStorage.removeItem("sesionActiva");
-        localStorage.removeItem("rolUsuario");
-        window.location.href = "../index.html";
-    }
-}
-
-const modalAjustes = document.createElement("div");
-modalAjustes.style.cssText = "display:none; position:fixed; inset:0; background:rgba(0, 0, 0, 0.7); z-index:99999; justify-content:center; align-items:center; padding:16px; box-sizing:border-box;";
-document.body.appendChild(modalAjustes);
-
-function cerrarModalAjustes() {
-    modalAjustes.style.display = "none";
-}
-
-modalAjustes.addEventListener("click", (e) => {
-    if (e.target === modalAjustes) cerrarModalAjustes();
-});
-
-document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modalAjustes.style.display === "flex") {
-        cerrarModalAjustes();
-    }
-});
-
-function abrirModalAjustes(titulo, cuerpoHtml) {
-    modalAjustes.innerHTML = `
-        <div style="background:var(--bg-sec, #241b16); color:var(--fc-color, #ffffff); border:1px solid var(--acento-2, #d4a373); border-radius:10px; max-width:430px; width:100%; padding:18px; box-sizing:border-box; font-family:inherit; max-height:90vh; overflow-y:auto;">
-            <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:12px;">
-                <h2 style="margin:0; font-size:18px;">${titulo}</h2>
-                <button id="maCerrar" type="button" style="background:none; color:inherit; border:1px solid rgba(255,255,255,0.2); border-radius:6px; width:30px; height:30px; cursor:pointer;">✕</button>
+function abrirModal(titulo, html) {
+    modal.innerHTML = `
+        <div style="background:#222; color:#fff; padding:16px; border-radius:6px; max-width:360px; width:90%; font-family:sans-serif; font-size:14px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                <strong>${titulo}</strong>
+                <button id="mCerrar" type="button">✕</button>
             </div>
-            ${cuerpoHtml}
+            <div>${html}</div>
         </div>
     `;
-    document.getElementById("maCerrar").addEventListener("click", cerrarModalAjustes);
-    modalAjustes.style.display = "flex";
+    document.getElementById("mCerrar").onclick = cerrarModal;
+    modal.style.display = "flex";
 }
 
-function abrirEstadoCuenta() {
-    const sesion = obtenerSesionAjustes();
-    if (!sesion) {
-        salirDesdeAjustes();
-        return;
-    }
-
-    const rol = (sesion.rol || "cliente").toLowerCase().trim();
-    const info = DESCRIPCION_CUENTA_AJUSTES[rol] || DESCRIPCION_CUENTA_AJUSTES.cliente;
-
-    abrirModalAjustes(
-        "Estado de cuenta",
-        `
-        <div style="display:flex; flex-direction:column; gap:8px; font-size:14px;">
-            <p style="margin:0;"><strong>Estatus:</strong> Activa</p>
-            <p style="margin:0;"><strong>Nombre:</strong> ${sesion.nombre || "Sin nombre"}</p>
-            <p style="margin:0;"><strong>Usuario:</strong> @${sesion.usuario || "usuario"}</p>
-            <p style="margin:0;"><strong>Tipo de cuenta:</strong> ${info.titulo}</p>
-            <p style="margin:0;"><strong>Correo:</strong> ${sesion.correo || "No registrado"}</p>
-            <p style="margin:0;"><strong>Teléfono:</strong> ${sesion.telefono || "No registrado"}</p>
-            <p style="margin:6px 0 0 0; font-size:13.5px; color:var(--acento-2, #d4a373);">${info.detalle}</p>
-        </div>
-        `
-    );
+function getSesion() {
+    if (typeof obtenerUsuarioSesion === "function") return obtenerUsuarioSesion();
+    return JSON.parse(sessionStorage.getItem("sesionActiva") || "null");
 }
 
-function cambiarAAdmin() {
-    let usuarios = [];
-    try {
-        usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-    } catch {
-        usuarios = [];
-    }
+function salirAjustes() {
+    if (typeof cerrarSesion === "function") return cerrarSesion();
+    sessionStorage.removeItem("sesionActiva");
+    window.location.href = "../index.html";
+}
 
-    const adminUsuario = usuarios.find(u => (u.usuario || "").toLowerCase() === "admin") || {
-        nombre: "Carlos Ramírez",
-        usuario: "admin",
-        contraseña: "admin123",
-        rol: "admin",
-        correo: "",
-        telefono: ""
+function verCuenta() {
+    const s = getSesion();
+    if (!s) return salirAjustes();
+    const info = ROLES_INFO[(s.rol || "cliente").toLowerCase()] || ROLES_INFO.cliente;
+
+    abrirModal("Estado de cuenta", `
+        <p>Estatus: Activa</p>
+        <p>Nombre: ${s.nombre || "Sin nombre"}</p>
+        <p>Usuario: @${s.usuario || "usuario"}</p>
+        <p>Rol: ${info.rol}</p>
+        <p>Correo: ${s.correo || "No registrado"}</p>
+        <p>Teléfono: ${s.telefono || "No registrado"}</p>
+        <p>${info.texto}</p>
+    `);
+}
+
+function editarPerfil() {
+    const s = getSesion();
+    if (!s) return salirAjustes();
+
+    abrirModal("Administrar perfil", `
+        <form id="fPerfil" style="display:flex; flex-direction:column; gap:6px;">
+            <label>Nombre</label>
+            <input id="pNombre" type="text" required value="${s.nombre || ""}">
+            <label>Correo</label>
+            <input id="pCorreo" type="email" value="${s.correo || ""}">
+            <label>Teléfono</label>
+            <input id="pTel" type="tel" value="${s.telefono || ""}">
+            <div style="display:flex; gap:8px; margin-top:8px;">
+                <button type="button" id="pCancel">Cancelar</button>
+                <button type="submit">Guardar</button>
+            </div>
+        </form>
+    `);
+
+    document.getElementById("pCancel").onclick = cerrarModal;
+    document.getElementById("fPerfil").onsubmit = e => {
+        e.preventDefault();
+        s.nombre = document.getElementById("pNombre").value.trim();
+        s.correo = document.getElementById("pCorreo").value.trim();
+        s.telefono = document.getElementById("pTel").value.trim();
+        sessionStorage.setItem("sesionActiva", JSON.stringify(s));
+
+        const usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
+        const i = usuarios.findIndex(u => u.usuario === s.usuario);
+        if (i !== -1) {
+            usuarios[i] = { ...usuarios[i], ...s };
+            localStorage.setItem("usuarios", JSON.stringify(usuarios));
+        }
+
+        cerrarModal();
+        alert("Perfil actualizado.");
     };
+}
 
-    sessionStorage.setItem("sesionActiva", JSON.stringify(adminUsuario));
+function entrarAdmin() {
+    const usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
+    const admin = usuarios.find(u => u.usuario === "admin") || {
+        nombre: "Carlos Ramírez", usuario: "admin", rol: "admin", correo: "", telefono: ""
+    };
+    sessionStorage.setItem("sesionActiva", JSON.stringify(admin));
     window.location.href = "inicio.html";
 }
 
-function abrirAdministrarPerfil() {
-    const sesion = obtenerSesionAjustes();
-    if (!sesion) {
-        salirDesdeAjustes();
-        return;
-    }
-
-    abrirModalAjustes(
-        "Administrar perfil",
-        `
-        <form id="formPerfilAjustes" style="display:flex; flex-direction:column; gap:10px;">
-            <div>
-                <label style="display:block; font-size:13px; margin-bottom:4px;">Rol</label>
-                <input type="text" value="${sesion.rol || "cliente"}" disabled style="width:100%; padding:7px 9px; border-radius:6px; border:1px solid rgba(255,255,255,0.15); background:var(--bg-color, #140f0c); color:inherit; box-sizing:border-box;">
-            </div>
-            <div>
-                <label style="display:block; font-size:13px; margin-bottom:4px;">Nombre completo</label>
-                <input id="apNombre" type="text" required value="${sesion.nombre || ""}" style="width:100%; padding:7px 9px; border-radius:6px; border:1px solid rgba(255,255,255,0.2); background:var(--bg-color, #140f0c); color:inherit; box-sizing:border-box;">
-            </div>
-            <div>
-                <label style="display:block; font-size:13px; margin-bottom:4px;">Correo electrónico</label>
-                <input id="apCorreo" type="email" value="${sesion.correo || ""}" style="width:100%; padding:7px 9px; border-radius:6px; border:1px solid rgba(255,255,255,0.2); background:var(--bg-color, #140f0c); color:inherit; box-sizing:border-box;">
-            </div>
-            <div>
-                <label style="display:block; font-size:13px; margin-bottom:4px;">Teléfono</label>
-                <input id="apTelefono" type="tel" value="${sesion.telefono || ""}" style="width:100%; padding:7px 9px; border-radius:6px; border:1px solid rgba(255,255,255,0.2); background:var(--bg-color, #140f0c); color:inherit; box-sizing:border-box;">
-            </div>
-            <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:6px;">
-                <button id="apCancelar" type="button" style="background:rgba(255,255,255,0.12); color:inherit; border:none; border-radius:6px; padding:7px 12px; cursor:pointer;">Cancelar</button>
-                <button type="submit" style="background:var(--acento, #a67c52); color:var(--bg-color, #140f0c); border:none; border-radius:6px; padding:7px 14px; font-weight:bold; cursor:pointer;">Guardar</button>
-            </div>
-        </form>
-        `
-    );
-
-    document.getElementById("apCancelar").addEventListener("click", cerrarModalAjustes);
-    document.getElementById("formPerfilAjustes").addEventListener("submit", (e) => {
-        e.preventDefault();
-        sesion.nombre = document.getElementById("apNombre").value.trim();
-        sesion.correo = document.getElementById("apCorreo").value.trim();
-        sesion.telefono = document.getElementById("apTelefono").value.trim();
-
-        sessionStorage.setItem("sesionActiva", JSON.stringify(sesion));
-
-        try {
-            const lista = JSON.parse(localStorage.getItem("usuarios")) || [];
-            const idx = lista.findIndex(u => (u.usuario || "").toLowerCase() === (sesion.usuario || "").toLowerCase());
-            if (idx !== -1) {
-                lista[idx] = { ...lista[idx], ...sesion };
-                localStorage.setItem("usuarios", JSON.stringify(lista));
-            }
-        } catch {
-            // Ignora error de storage
-        }
-
-        cerrarModalAjustes();
-        alert("Perfil actualizado.");
-    });
-}
-
 document.addEventListener("DOMContentLoaded", () => {
-    const sesion = obtenerSesionAjustes();
-    const rol = sesion && sesion.rol ? String(sesion.rol).toLowerCase().trim() : "cliente";
+    modal = document.createElement("div");
+    modal.style.cssText = "display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:99999; justify-content:center; align-items:center;";
+    modal.onclick = e => { if (e.target === modal) cerrarModal(); };
+    document.body.appendChild(modal);
 
-    const btnLoginAdmin = document.getElementById("btnLoginAdmin");
-    if (btnLoginAdmin) {
-        if (rol === "admin" || rol === "jefe") {
-            btnLoginAdmin.style.display = "none";
-        } else {
-            btnLoginAdmin.addEventListener("click", cambiarAAdmin);
-        }
+    const s = getSesion();
+    const rol = (s?.rol || "cliente").toLowerCase();
+
+    const btnAdmin = document.getElementById("btnLoginAdmin");
+    if (btnAdmin) {
+        if (rol === "admin" || rol === "jefe") btnAdmin.style.display = "none";
+        else btnAdmin.onclick = entrarAdmin;
     }
 
-    const btnCuenta = document.getElementById("btnCuentaAjustes");
-    if (btnCuenta) {
-        btnCuenta.addEventListener("click", abrirEstadoCuenta);
-    }
+    const onClick = (id, fn) => {
+        const el = document.getElementById(id);
+        if (el) el.onclick = fn;
+    };
 
-    const btnHistorial = document.getElementById("btnHistorialCompras");
-    if (btnHistorial) {
-        btnHistorial.addEventListener("click", () => {
-            abrirModalAjustes(
-                "Historial de compras",
-                `<p style="margin:0; font-size:14px;">Aún no hay compras registradas para <strong>${sesion ? sesion.nombre : "tu cuenta"}</strong>.</p>`
-            );
-        });
-    }
+    onClick("btnCuentaAjustes", verCuenta);
+    onClick("btnAdministrarPerfil", editarPerfil);
+    onClick("btnCerrarSesionAjustes", salirAjustes);
+    onClick("btnHistorialCompras", () => abrirModal("Historial de compras", `<p>Sin compras registradas para ${s?.nombre || "tu cuenta"}.</p>`));
+    onClick("btnSoporteTecnico", () => abrirModal("Soporte técnico", `<p>soporte@cafeteriaweb.local</p>`));
+    onClick("btnBolsaTrabajo", () => abrirModal("Bolsa de trabajo", `<p>Vacantes: barra y preparación.</p>`));
 
-    const btnSoporte = document.getElementById("btnSoporteTecnico");
-    if (btnSoporte) {
-        btnSoporte.addEventListener("click", () => {
-            abrirModalAjustes(
-                "Soporte técnico",
-                `<p style="margin:0; font-size:14px;">Contacto de soporte: soporte@cafeteriaweb.local</p>`
-            );
-        });
-    }
-
-    const btnBolsa = document.getElementById("btnBolsaTrabajo");
-    if (btnBolsa) {
-        btnBolsa.addEventListener("click", () => {
-            abrirModalAjustes(
-                "Bolsa de trabajo",
-                `<p style="margin:0; font-size:14px;">Vacantes disponibles: atención en barra y preparación.</p>`
-            );
-        });
-    }
-
-    const btnPerfil = document.getElementById("btnAdministrarPerfil");
-    if (btnPerfil) {
-        btnPerfil.addEventListener("click", abrirAdministrarPerfil);
-    }
-
-    const btnCerrarAjustes = document.getElementById("btnCerrarSesionAjustes");
-    if (btnCerrarAjustes) {
-        btnCerrarAjustes.addEventListener("click", salirDesdeAjustes);
-    }
-
-    const btnCerrarNav = document.getElementById("btnCerrarSesion");
-    if (btnCerrarNav) {
-        btnCerrarNav.addEventListener("click", (e) => {
+    const btnNavSalir = document.getElementById("btnCerrarSesion");
+    if (btnNavSalir) {
+        btnNavSalir.onclick = e => {
             e.preventDefault();
-            salirDesdeAjustes();
-        });
+            salirAjustes();
+        };
     }
 });
