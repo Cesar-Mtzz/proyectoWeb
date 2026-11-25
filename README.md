@@ -60,6 +60,8 @@ link = https://cesar-mtzz.github.io/proyectoWeb/
 
 
 8. Credenciales de Prueba (Demostración)
-- Administrador / Jefe: jefe@cafeteria.com / 123456
-- Empleado: empleado@cafeteria.com / 123456
-- Cliente: cliente@cafeteria.com / 123456
+"Usuario - Contraseña"
+cliente - cliente123
+trabajador - trabajador123
+admin - admin123
+jefe - jefe123
