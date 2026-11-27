@@ -226,6 +226,198 @@ header nav img:hover {
     border-bottom-color: var(--acento-2);
 }
 
+/* Ventanas emergentes */
+
+#modal {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(5px);
+}
+
+/* Contenido de las ventanas */
+
+#modal > div {
+    width: 100%;
+    max-width: 43rem;
+    max-height: 90vh;
+    overflow-y: auto;
+
+    padding: 2rem;
+
+    background-color: var(--bg-sec);
+    color: var(--fc-color);
+
+    border: 1px solid var(--acento-2);
+    border-radius: 1rem;
+
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.4);
+
+    animation: aparecerModal 0.25s ease;
+}
+
+/* Encabezado de las ventanas */
+
+#modal > div > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+#modal h2 {
+    margin: 0;
+    color: var(--fc-color);
+    font-size: 1.5rem;
+}
+
+#modal small {
+    color: var(--acento-2);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Imagen del producto en detalles */
+
+#modal img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Texto de detalles */
+
+#modal p {
+    color: var(--fc-color);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0.8rem 0;
+}
+
+#modal strong {
+    color: var(--acento-2);
+    font-size: 1.05rem;
+}
+
+/* Formulario para subir productos */
+
+#fSubir {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 100%;
+}
+
+#fSubir label {
+    color: var(--fc-color);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+#fSubir input,
+#fSubir select,
+#fSubir textarea {
+    width: 100%;
+    min-width: 0;
+    padding: 0.75rem 1rem;
+
+    background-color: var(--bg-color);
+    color: var(--fc-color);
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 0.7rem;
+
+    font-family: inherit;
+    font-size: 0.95rem;
+
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#fSubir input:focus,
+#fSubir select:focus,
+#fSubir textarea:focus {
+    border-color: var(--acento);
+    box-shadow: 0 0 0 3px rgba(166, 124, 82, 0.15);
+}
+
+#fSubir textarea {
+    resize: vertical;
+    min-height: 5rem;
+}
+
+#fSubir select option {
+    background-color: var(--bg-sec);
+    color: var(--fc-color);
+}
+
+/* Botones de las ventanas */
+
+#modal button {
+    padding: 0.65rem 1.1rem;
+
+    border: none;
+    border-radius: 0.65rem;
+
+    background-color: var(--acento);
+    color: var(--fc-dark);
+
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+#modal button:hover {
+    background-color: var(--acento-2);
+    transform: translateY(-2px);
+}
+
+/* Botones para cerrar y cancelar */
+
+#modal #mCerrar,
+#modal #mCerrar2,
+#modal #mCerrarSub,
+#modal #npCancel {
+    background-color: var(--bg-color);
+    color: var(--fc-color);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+#modal #mCerrar:hover,
+#modal #mCerrar2:hover,
+#modal #mCerrarSub:hover,
+#modal #npCancel:hover {
+    background-color: var(--rojo);
+    color: white;
+}
+
+/* Animación */
+
+@keyframes aparecerModal {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Adaptación a pantallas medianas */
+
 @media (max-width: 960px) {
     #productos {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -234,10 +426,567 @@ header nav img:hover {
     }
 }
 
+/* Adaptación a pantallas pequeñas */
+
 @media (max-width: 640px) {
     #productos {
         grid-template-columns: 1fr;
         padding: 1.1rem;
         gap: 1rem;
+    }
+
+    #modal {
+        padding: 1rem;
+    }
+
+    #modal > div {
+        padding: 1.3rem;
+        max-height: 90vh;
+    }
+
+    #modal h2 {
+        font-size: 1.25rem;
+    }
+
+    #fSubir {
+        gap: 0.6rem;
+    }
+
+    #fSubir input,
+    #fSubir select,
+    #fSubir textarea {
+        font-size: 0.9rem;
+        padding: 0.65rem;
+    }
+
+    #fSubir button {
+        flex: 1;
+    }
+}
+
+/* Botones de ventanas emergentes */
+
+#modal button,
+#btnSubirProducto {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+
+    min-height: 2.7rem;
+    padding: 0.65rem 1.2rem;
+
+    border: 1px solid var(--acento);
+    border-radius: 0.7rem;
+
+    background-color: var(--acento);
+    color: var(--fc-dark);
+
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease,
+                filter 0.2s ease;
+}
+
+#modal button:hover,
+#btnSubirProducto:hover {
+    background-color: var(--acento-2);
+    border-color: var(--acento-2);
+    transform: translateY(-2px);
+}
+
+#modal button:active,
+#btnSubirProducto:active {
+    transform: scale(0.96);
+}
+
+/* Botones de cerrar y cancelar */
+
+#modal #mCerrar,
+#modal #mCerrar2,
+#modal #mCerrarSub,
+#modal #npCancel {
+    background-color: var(--bg-color);
+    color: var(--fc-color);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+#modal #mCerrar:hover,
+#modal #mCerrar2:hover,
+#modal #mCerrarSub:hover,
+#modal #npCancel:hover {
+    background-color: var(--rojo);
+    border-color: var(--rojo);
+    color: white;
+}
+
+/* Botones de eliminar */
+
+#modal #mEliminar,
+#modal .btn-del {
+    background-color: var(--rojo);
+    color: white;
+    border-color: var(--rojo);
+}
+
+#modal #mEliminar:hover,
+#modal .btn-del:hover {
+    filter: brightness(0.85);
+    border-color: var(--rojo);
+}
+
+/* Botones del formulario */
+
+#fSubir button[type="submit"] {
+    background-color: var(--acento);
+    color: var(--fc-dark);
+}
+
+#fSubir button[type="button"] {
+    background-color: var(--bg-color);
+    color: var(--fc-color);
+}
+
+/* Botón para subir productos */
+
+#btnSubirProducto {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    z-index: 9998;
+    min-height: 3rem;
+    padding: 0.8rem 1.3rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Adaptación móvil */
+
+@media (max-width: 480px) {
+    #modal button {
+        min-height: 2.5rem;
+        padding: 0.6rem 0.8rem;
+        font-size: 0.85rem;
+    }
+
+    #btnSubirProducto {
+        left: 1rem;
+        bottom: 1rem;
+    }
+}
+
+/* Botones de las tarjetas de productos */
+
+.producto > div:last-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    width: 100%;
+    margin-top: auto;
+}
+
+/* Botón Más detalles */
+
+.producto .ver-detalles {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 2.7rem;
+    padding: 0.65rem 1.2rem;
+
+    background-color: var(--acento);
+    color: var(--fc-dark);
+
+    border: 1px solid var(--acento);
+    border-radius: 0.7rem;
+
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.producto .ver-detalles:hover {
+    background-color: var(--acento-2);
+    border-color: var(--acento-2);
+    color: var(--fc-dark);
+    transform: translateY(-2px);
+}
+
+/* Botón Eliminar */
+
+.producto .btn-del {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 2.7rem;
+    padding: 0.65rem 1.2rem;
+
+    background-color: var(--rojo) !important;
+    color: white !important;
+
+    border: 1px solid var(--rojo) !important;
+    border-radius: 0.7rem;
+
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.producto .btn-del:hover {
+    filter: brightness(0.85);
+    transform: translateY(-2px);
+}
+
+.producto .ver-detalles:active,
+.producto .btn-del:active {
+    transform: scale(0.96);
+}
+
+/* Botón de la cesta */
+
+#btnCarrito {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 9998;
+
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--bg-color);
+    border: 1px solid var(--acento);
+    border-radius: 50%;
+
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform .2s ease;
+}
+
+#btnCarrito:hover {
+    transform: translateY(-3px);
+}
+
+#btnCarrito img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+#contadorCarrito {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+
+    width: 23px;
+    height: 23px;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--rojo);
+    color: white;
+    border-radius: 50%;
+
+    font-size: .75rem;
+    font-weight: bold;
+}
+
+/* Botones de las tarjetas */
+
+.acciones-producto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .7rem;
+    width: 100%;
+    margin-top: auto;
+}
+
+.producto .btn-agregar {
+    min-height: 2.7rem;
+    padding: .65rem 1.2rem;
+
+    background-color: var(--acento);
+    color: var(--fc-dark);
+
+    border: 1px solid var(--acento);
+    border-radius: .7rem;
+
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.producto .btn-agregar:hover {
+    background-color: var(--acento-2);
+    transform: translateY(-2px);
+}
+
+/* Ventana del carrito */
+
+.ventana-carrito {
+    max-width: 650px !important;
+    width: 100%;
+}
+
+.encabezado-carrito {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.lista-carrito {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 55vh;
+    overflow-y: auto;
+}
+
+.carrito-vacio {
+    text-align: center;
+    padding: 2rem;
+    opacity: .7;
+}
+
+.producto-carrito {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 1rem;
+    background-color: var(--bg-color);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: .8rem;
+}
+
+.producto-carrito > img {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+    background-color: var(--acento);
+    border-radius: .6rem;
+    padding: .4rem;
+}
+
+.info-carrito {
+    flex: 1;
+    min-width: 0;
+}
+
+.info-carrito h3 {
+    margin: 0 0 .3rem;
+    font-size: 1rem;
+}
+
+.info-carrito p {
+    margin: 0 0 .5rem !important;
+    font-size: .85rem !important;
+}
+
+.cantidad-carrito {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+}
+
+.cantidad-carrito button {
+    width: 30px;
+    min-height: 30px !important;
+    padding: 0 !important;
+}
+
+.cantidad-carrito span {
+    font-weight: bold;
+}
+
+.subtotal-carrito {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: .6rem;
+}
+
+.eliminar-carrito {
+    background-color: var(--rojo) !important;
+    color: white !important;
+    border-color: var(--rojo) !important;
+    padding: .4rem .6rem !important;
+    min-height: auto !important;
+    font-size: .75rem !important;
+}
+
+.pie-carrito {
+    margin-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,.15);
+    padding-top: 1rem;
+}
+
+.total-carrito {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.acciones-carrito {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: .7rem;
+}
+
+#btnPagar:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+}
+
+/* Ticket */
+
+.ticket {
+    max-width: 430px !important;
+    font-family: monospace;
+    background-color: white !important;
+    color: #222 !important;
+    border: 1px dashed #777 !important;
+    border-radius: 4px !important;
+}
+
+.ticket h2,
+.ticket p,
+.ticket strong,
+.ticket span,
+.ticket small {
+    color: #222 !important;
+}
+
+.ticket-encabezado {
+    text-align: center;
+}
+
+.ticket-encabezado h2 {
+    font-size: 1.5rem !important;
+    margin-bottom: .3rem !important;
+}
+
+.ticket-encabezado p {
+    margin: .2rem 0 !important;
+}
+
+.ticket-encabezado > strong {
+    display: block;
+    margin-top: .8rem;
+    font-size: 1.1rem;
+}
+
+.ticket-datos {
+    margin-top: 1.2rem;
+}
+
+.ticket-datos p {
+    margin: .3rem 0 !important;
+    font-size: .85rem !important;
+}
+
+.ticket-linea {
+    border-top: 1px dashed #777;
+    margin: 1rem 0;
+}
+
+.ticket-productos {
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+}
+
+.ticket-producto {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.ticket-producto div {
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+}
+
+.ticket-producto strong {
+    font-size: .9rem !important;
+}
+
+.ticket-producto small {
+    font-size: .8rem;
+}
+
+.ticket-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+}
+
+.ticket-total strong {
+    font-size: 1.2rem !important;
+}
+
+.ticket-gracias {
+    text-align: center;
+    margin: 1.5rem 0 !important;
+    font-weight: bold;
+}
+
+.acciones-ticket {
+    display: flex;
+    justify-content: center;
+    gap: .7rem;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+    #btnCarrito {
+        width: 52px;
+        height: 52px;
+        right: 15px;
+        bottom: 15px;
+    }
+
+    .producto-carrito {
+        gap: .6rem;
+        padding: .7rem;
+    }
+
+    .producto-carrito > img {
+        width: 48px;
+        height: 48px;
+    }
+
+    .info-carrito h3 {
+        font-size: .85rem;
+    }
+
+    .subtotal-carrito strong {
+        font-size: .85rem;
     }
 }
