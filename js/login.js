@@ -16,6 +16,46 @@ const usuariosIniciales = [
     new User("Luis Hernández", "trabajador", "trabajador123", "trabajador")
 ];
 
+const personalBase = [
+    { id: 1, nombre: "Carlos Eduardo Gomez", horario: "Matutino", puesto: "Gerente" },
+    { id: 2, nombre: "Valeria Torres Ríos", horario: "Vespertino", puesto: "Gerente" },
+    { id: 3, nombre: "Alejandro Silva Castro", horario: "Vespertino", puesto: "Staff" },
+    { id: 4, nombre: "Sofía Ramírez Méndez", horario: "Vespertino", puesto: "Gerente en capacitación" },
+    { id: 5, nombre: "Juan Martínez Hernández", horario: "Matutino", puesto: "En capacitación" }
+];
+
+function generarUsuarioDesdeNombre(nombre, usuariosExistentes) {
+    const base = String(nombre || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9\s]/g, "")
+        .trim()
+        .split(/\s+/)
+        .slice(0, 2)
+        .join(".") || "trabajador";
+
+    let usuario = base;
+    let i = 1;
+    while (usuariosExistentes.some(u => (u.usuario || "").toLowerCase() === usuario)) {
+        usuario = `${base}${i}`;
+        i++;
+    }
+    return usuario;
+}
+
+function crearUsuarioTrabajador(persona, usuariosExistentes) {
+    const usuario = generarUsuarioDesdeNombre(persona.nombre, usuariosExistentes);
+    return new User(
+        persona.nombre,
+        usuario,
+        "123",
+        "trabajador",
+        `${usuario}@cafeteria.local`,
+        ""
+    );
+}
+
 function obtenerRutaBase() {
     return window.location.pathname.includes("/html/") ? "../" : "./";
 }
@@ -36,10 +76,37 @@ function irAInicio() {
 }
 
 function inicializarUsuarios() {
-    let usuarios = JSON.parse(localStorage.getItem("usuarios"));
-    if (!usuarios || usuarios.length < 4) {
-        localStorage.setItem("usuarios", JSON.stringify(usuariosIniciales));
+    let guardados = JSON.parse(localStorage.getItem("usuarios"));
+    if (!Array.isArray(guardados)) {
+        guardados = [];
     }
+
+    const usuarios = guardados.map(u =>
+        new User(u.nombre, u.usuario, u.contraseña ?? u.password ?? "", u.rol, u.correo || "", u.telefono || "")
+    );
+
+    usuariosIniciales.forEach(base => {
+        const existe = usuarios.some(u => (u.usuario || "").toLowerCase() === base.usuario.toLowerCase());
+        if (!existe) {
+            usuarios.push(new User(base.nombre, base.usuario, base.contraseña, base.rol, base.correo, base.telefono));
+        }
+    });
+
+    let listaPersonal = JSON.parse(localStorage.getItem("personal"));
+    if (!Array.isArray(listaPersonal)) {
+        listaPersonal = personalBase;
+    }
+
+    listaPersonal.forEach(persona => {
+        const yaExiste = usuarios.some(
+            u => (u.nombre || "").toLowerCase() === String(persona.nombre || "").toLowerCase()
+        );
+        if (!yaExiste && persona.nombre) {
+            usuarios.push(crearUsuarioTrabajador(persona, usuarios));
+        }
+    });
+
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
 }
 
 function crearUsuario(e) {
@@ -76,7 +143,7 @@ function iniciarSesion(e) {
 
     const usuarios = JSON.parse(localStorage.getItem("usuarios"));
     const encontrado = usuarios.find(
-        u => u.usuario.toLowerCase() === usuario && u.contraseña === password
+        u => (u.usuario || "").toLowerCase() === usuario && (u.contraseña ?? u.password) === password
     );
 
     if (encontrado) {

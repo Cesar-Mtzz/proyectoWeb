@@ -88,13 +88,9 @@ function editarPerfil() {
     };
 }
 
-function entrarAdmin() {
-    const usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
-    const admin = usuarios.find(u => u.usuario === "admin") || {
-        nombre: "Carlos Ramírez", usuario: "admin", rol: "admin", correo: "", telefono: ""
-    };
-    sessionStorage.setItem("sesionActiva", JSON.stringify(admin));
-    window.location.href = "inicio.html";
+function irALoginAdmin() {
+    sessionStorage.removeItem("sesionActiva");
+    window.location.href = "../index.html";
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -108,8 +104,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const btnAdmin = document.getElementById("btnLoginAdmin");
     if (btnAdmin) {
-        if (rol === "admin" || rol === "jefe") btnAdmin.style.display = "none";
-        else btnAdmin.onclick = entrarAdmin;
+        if (rol === "trabajador" || rol === "admin" || rol === "jefe") {
+            btnAdmin.style.display = "none";
+        } else {
+            btnAdmin.onclick = irALoginAdmin;
+        }
     }
 
     const onClick = (id, fn) => {

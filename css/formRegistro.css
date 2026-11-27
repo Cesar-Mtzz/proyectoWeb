@@ -1,20 +1,41 @@
 html {
-        background-color: var(--bg-color);
+    background-color: var(--bg-color);
 }
 
 body {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     min-width: 100vw;
     min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+
+    background-color: var(--bg-color);
+    background-image:
+        radial-gradient(circle at center, rgba(43, 38, 37, 0.55) 0%, rgba(43, 38, 37, 0.88) 75%),
+        url("../imagenes/Patrón\ Café\,\ Donas\ y\ Pasteles.png");
+    background-repeat: no-repeat, repeat;
+    background-size: cover, 560px auto;
+    background-position: center center, center top;
+    background-attachment: fixed, fixed;
+}
+
+body.pagina-registro {
+    background-image:
+        radial-gradient(circle at center, rgba(43, 38, 37, 0.55) 0%, rgba(43, 38, 37, 0.88) 75%),
+        url("../imagenes/Patrón\ Café\,\ Donas\ y\ Pasteles.png");
 }
 
 #inicio, #registro {
+    position: relative;
+    z-index: 1;
     background-color: var(--acento);
     border-radius: var(--rb-cont);
     color: var(--fc-dark);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
 }
 
 #inicio #box {
@@ -89,7 +110,7 @@ body {
     text-align: center;
 }
 
-#formulario p a{
+#formulario p a {
     text-decoration: none;
     color: var(--bg-color);
     font-weight: bold; 
@@ -97,7 +118,7 @@ body {
     cursor: pointer;
 }
 
-#formulario p a:hover{
+#formulario p a:hover {
     color: var(--bg-sec);
     transition: ease-in-out .5s;
 }
@@ -121,6 +142,6 @@ body {
     transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-.formulario button:active {
+#formulario button:active {
     transform: scale(0.98);
 }
