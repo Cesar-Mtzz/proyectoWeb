@@ -30,64 +30,47 @@
         </section>
 
         <section id="contenido">
-            <section id="dashboard">
-                <div class="tarjeta">
-                    <div>
-                        <img class="iconPersona" src="../icons/persona.svg" alt="">
-                        <button class="btnEliminar noVisible" type="button"><img src="../icons/menos.svg" alt="Eliminar"></button>
-                    </div>
-                    <h1>Carlos Eduardo Gomez</h1>
-                    <p>10:00 - 17:00</p>
-                    <p class="gerente">Gerente</p>
-                </div>
-
-                <div class="tarjeta">
-                    <div>
-                        <img class="iconPersona" src="../icons/persona.svg" alt="">
-                        <button class="btnEliminar noVisible" type="button"><img src="../icons/menos.svg" alt="Eliminar"></button>
-                    </div>
-                    <h1>Valeria Torres Ríos</h1>
-                    <p>L-V:17:00 - 21:00, S:10:00 - 14:00</p>
-                    <p class="gerente">Gerente</p>
-                </div>
-
-                <div class="tarjeta">
-                    <div>
-                        <img class="iconPersona" src="../icons/persona.svg" alt="">
-                        <button class="btnEliminar noVisible" type="button"><img src="../icons/menos.svg" alt="Eliminar"></button>
-                    </div>
-                    <h1>Alejandro Silva Castro</h1>
-                    <p>L-V:17:00 - 21:00, S:10:00 - 14:00</p>
-                    <p class="vacio">Staff</p>
-                </div>
-
-                <div class="tarjeta">
-                    <div>
-                        <img class="iconPersona" src="../icons/persona.svg" alt="">
-                        <button class="btnEliminar noVisible" type="button"><img src="../icons/menos.svg" alt="Eliminar"></button>
-                    </div>
-                    <h1>Sofía Ramírez Méndez</h1>
-                    <p>L-V:17:00 - 21:00, S:10:00 - 14:00</p>
-                    <p class="capacitacion">Gerente en capacitacion</p>
-                </div>
-
-                <div class="tarjeta">
-                    <div>
-                        <img class="iconPersona" src="../icons/persona.svg" alt="">
-                        <button class="btnEliminar noVisible" type="button"><img src="../icons/menos.svg" alt="Eliminar"></button>
-                    </div>
-                    <h1>Juan Martínez Hernadez</h1>
-                    <p>10:00 - 17:00</p>
-                    <p class="capacitacion">En capacitacion</p>
-                </div>
-            </section>
+            <section id="dashboard"></section>
         </section>
     </div>
 
     <nav id="botoneraEditar">
-        <button id="btnAgregar" class="noVisible" type="button"><img src="../icons/mas.svg" alt="Agregar"></button>
-        <button id="btnEditar" type="button"><img src="../icons/editar.svg" alt="Editar"></button>
+        <button id="btnAgregar" class="noVisible" type="button">
+            <img src="../icons/mas.svg" alt="Agregar">
+        </button>
+
+        <button id="btnEditar" type="button">
+            <img src="../icons/editar.svg" alt="Editar">
+        </button>
     </nav>
+
+    <div id="menuFlotante">
+        <form id="formPersonal">
+            <h2 id="tituloFormulario">Agregar personal</h2>
+
+            <label for="inputNombre">Nombre completo</label>
+            <input type="text" id="inputNombre" placeholder="Nombre del empleado" required maxlength="100">
+
+            <label for="selectHorario">Horario</label>
+            <select id="selectHorario" required>
+                <option value="Matutino">Matutino (10:00 - 17:00)</option>
+                <option value="Vespertino">Vespertino (17:00 - 21:00)</option>
+            </select>
+
+            <label for="selectPuesto">Puesto</label>
+            <select id="selectPuesto" required>
+                <option value="Gerente">Gerente</option>
+                <option value="Gerente en capacitación">Gerente en capacitación</option>
+                <option value="Staff">Staff</option>
+                <option value="En capacitación">En capacitación</option>
+            </select>
+
+            <div class="botonesFormulario">
+                <button type="button" id="btnCancelar">Cancelar</button>
+                <button type="submit" id="btnGuardar">Guardar</button>
+            </div>
+        </form>
+    </div>
 
     <script src="../js/login.js"></script>
     <script src="../js/roles.js"></script>

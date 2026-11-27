@@ -45,30 +45,45 @@ header nav a:hover {
     color: var(--acento-2);
 }
 
+/* Contenido principal */
+
 #contenido {
     position: relative;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
 }
 
+/* Contenedor de tarjetas */
+
 #dashboard {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 1fr;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
     align-items: center;
-    justify-items: center;
-    width: 90%;
-    height: 90%;
+    gap: 2rem;
+    width: 95%;
+    padding: 2rem;
 }
+
+/* Tarjetas de personal */
 
 #dashboard .tarjeta {
     display: grid;
     grid-template-rows: 1fr 2fr 1fr 1fr;
     align-items: center;
     justify-items: center;
-    width: 95%;
-    height: 75%;
+
+    flex: 0 0 32rem;
+    width: 32rem;
+    height: 30rem;
+    box-sizing: border-box;
+
+    padding: 1rem;
     background-color: var(--acento);
     border-radius: var(--rb-cont);
     color: var(--fc-dark);
@@ -82,16 +97,113 @@ header nav a:hover {
 #dashboard .tarjeta div {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
     width: 100%;
 }
 
+/* Icono de persona */
+
 #dashboard .tarjeta .iconPersona {
     width: 4rem;
-    margin: 2rem 0 0 2rem;
+    height: 4rem;
+    margin: 1rem auto 0 1rem;
     padding: .5rem;
     background-color: var(--fc-color);
     border-radius: var(--rb-cont);
 }
+
+/* Botones de modificar y eliminar */
+
+#dashboard .tarjeta .btnModificar,
+#dashboard .tarjeta .btnEliminar {
+    width: 4rem;
+    height: 4rem;
+    flex-shrink: 0;
+    margin: 1rem 0 0;
+    padding: .5rem;
+
+    border: none;
+    border-radius: var(--rb-cont);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+    transition: .3s;
+}
+
+#dashboard .tarjeta .btnModificar {
+    display: none;
+}
+
+#dashboard .tarjeta .btnEliminar {
+    background-color: var(--rojo);
+}
+
+#dashboard .tarjeta .btnModificar img,
+#dashboard .tarjeta .btnEliminar img {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+#dashboard .tarjeta .btnModificar:hover,
+#dashboard .tarjeta .btnEliminar:hover {
+    filter: brightness(.85);
+}
+
+/* Mostrar modificar únicamente cuando eliminar esté visible */
+
+#dashboard .tarjeta:has(.btnEliminar:not(.noVisible)) .btnModificar {
+    display: flex;
+}
+
+/* Nombre del empleado */
+
+#dashboard .tarjeta h1 {
+    height: 100%;
+    padding-top: 2rem;
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+/* Horario */
+
+#dashboard .tarjeta p {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Puestos */
+
+#dashboard .tarjeta .capacitacion,
+#dashboard .tarjeta .gerente,
+#dashboard .tarjeta .vacio {
+    color: var(--fc-color);
+    margin: 0;
+    padding: .5rem 1rem;
+    border-radius: var(--rb-cont);
+    font-size: 1.8rem;
+    font-weight: normal;
+    text-align: center;
+}
+
+#dashboard .tarjeta .capacitacion {
+    background-color: var(--rojo);
+}
+
+#dashboard .tarjeta .gerente {
+    background-color: var(--bg-color);
+}
+
+#dashboard .tarjeta .vacio {
+    background-color: var(--acento-2);
+}
+
+/* Animaciones originales */
 
 .noVisible {
     display: none;
@@ -110,69 +222,14 @@ header nav a:hover {
     visibility: visible;
 }
 
-#dashboard .tarjeta .btnEliminar {
-    width: auto;
-    margin: 2rem 0 0 2rem;
-    background-color: var(--rojo);
-    border-radius: var(--rb-cont);
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: .3s;
-}
-
-#dashboard .tarjeta .btnEliminar:hover {
-    filter: brightness(0.9);
-}
-
-#dashboard .tarjeta .btnEliminar img {
-    width: 4rem;
-    height: 4rem;
-    padding: .5rem;
-}
-
-#dashboard .tarjeta h1 {
-    height: 100%;
-    padding-top: 2rem;
-    font-size: 3rem;
-}
-
-#dashboard .tarjeta p {
-    font-size: 2.5rem;
-    font-weight: bold;
-}
-
-#dashboard .tarjeta .capacitacion,
-#dashboard .tarjeta .gerente,
-#dashboard .tarjeta .vacio {
-    color: var(--fc-color);
-    margin: 0;
-    padding: .5rem 1rem;
-    border-radius: var(--rb-cont);
-    font-size: 2rem;
-    font-weight: normal;
-    text-align: center;
-}
-
-#dashboard .tarjeta .capacitacion {
-    background-color: var(--rojo);
-}
-
-#dashboard .tarjeta .gerente {
-    background-color: var(--bg-color);
-}
-
-#dashboard .tarjeta .vacio {
-    background-color: var(--acento-2);
-}
+/* Botonera de edición */
 
 #botoneraEditar {
     position: absolute;
     z-index: 999;
     bottom: 3rem;
     right: 3rem;
+
     display: flex;
     flex-direction: row;
     gap: 1rem;
@@ -181,11 +238,14 @@ header nav a:hover {
 #botoneraEditar button {
     width: 4.5rem;
     height: 4.5rem;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
     border-radius: 100%;
     border: none;
+
     background-color: var(--acento);
     cursor: pointer;
     transition: .3s;
@@ -198,4 +258,171 @@ header nav a:hover {
 
 #botoneraEditar button:hover {
     background-color: var(--acento-2);
+}
+
+/* Menú flotante */
+
+#menuFlotante {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    padding: 2rem;
+    box-sizing: border-box;
+
+    background-color: rgba(0, 0, 0, .75);
+    backdrop-filter: blur(4px);
+}
+
+#menuFlotante.activo {
+    display: flex;
+}
+
+/* Formulario */
+
+#formPersonal {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+
+    width: 42rem;
+    max-width: 100%;
+    box-sizing: border-box;
+
+    padding: 3rem;
+
+    background-color: var(--bg-sec);
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: var(--rb-cont);
+
+    color: var(--fc-color);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, .3);
+}
+
+#formPersonal h2 {
+    width: 100%;
+    margin: 0 0 1rem;
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+#formPersonal label {
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Inputs y select */
+
+#formPersonal input,
+#formPersonal select {
+    display: block;
+
+    width: 100%;
+    height: 4.5rem;
+    box-sizing: border-box;
+
+    padding: 0 1.2rem;
+
+    border: 1px solid rgba(255, 255, 255, .15);
+    border-radius: var(--rb-cont);
+
+    background-color: var(--bg-color);
+    color: var(--fc-color);
+
+    font-size: 1.5rem;
+    outline: none;
+    transition: .3s;
+}
+
+#formPersonal input:focus,
+#formPersonal select:focus {
+    border-color: var(--acento);
+}
+
+#formPersonal select option {
+    background-color: var(--bg-sec);
+    color: var(--fc-color);
+}
+
+/* Botones del formulario */
+
+.botonesFormulario {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
+.botonesFormulario button {
+    min-width: 10rem;
+    height: 4rem;
+    padding: 0 1.5rem;
+
+    border: none;
+    border-radius: var(--rb-cont);
+
+    background-color: var(--acento);
+    color: var(--fc-dark);
+
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.botonesFormulario button:hover {
+    filter: brightness(.85);
+}
+
+#btnCancelar {
+    background-color: var(--rojo);
+    color: var(--fc-color);
+}
+
+/* Adaptación a pantallas pequeñas */
+
+@media (max-width: 600px) {
+
+    header nav {
+        flex-wrap: wrap;
+    }
+
+    header nav #buscador {
+        width: 100%;
+    }
+
+    #dashboard {
+        width: 100%;
+        padding: 1rem;
+        box-sizing: border-box;
+    }
+
+    #dashboard .tarjeta {
+        flex-basis: 100%;
+        max-width: 32rem;
+    }
+
+    #menuFlotante {
+        padding: 1rem;
+    }
+
+    #formPersonal {
+        padding: 2rem;
+        gap: 1rem;
+    }
+
+    #formPersonal h2 {
+        font-size: 2rem;
+    }
+
+    .botonesFormulario button {
+        min-width: 0;
+        flex: 1;
+    }
 }
