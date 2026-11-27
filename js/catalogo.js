@@ -213,6 +213,7 @@ function abrirCarrito() {
 function generarTicket(nombreCliente) {
     if (carrito.length === 0) return;
 
+    const sesion = JSON.parse(sessionStorage.getItem('sesionActiva') || 'null');
     const pedido = 'PEDIDO-#' + Math.floor(100000000 + Math.random() * 900000000);
     const fecha = new Date().toLocaleString('es-MX');
     const productosComprados = carrito.map(item => ({
@@ -223,6 +224,7 @@ function generarTicket(nombreCliente) {
 
     const nuevoPedido = {
         id: pedido,
+        usuario: sesion?.usuario || '',
         cliente: nombreCliente,
         fecha: fecha,
         productos: productosComprados,
