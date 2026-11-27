@@ -119,6 +119,8 @@ function eliminarDelCarrito(indice) {
 
 function abrirCarrito() {
     const total = obtenerTotal();
+    const sesion = JSON.parse(sessionStorage.getItem('sesionActiva') || 'null');
+    const nombreInicial = sesion?.nombre || '';
 
     modal.innerHTML = `
         <div class="ventana-carrito">
@@ -156,6 +158,13 @@ function abrirCarrito() {
                 `).join('')}
             </div>
 
+            ${carrito.length > 0 ? `
+                <div class="campo-nombre-pedido">
+                    <label for="nombreClientePedido">Nombre para llamar tu pedido</label>
+                    <input id="nombreClientePedido" type="text" placeholder="Ej. Ana López" value="" maxlength="60" required>
+                </div>
+            ` : ''}
+
             <div class="pie-carrito">
                 <div class="total-carrito">
                     <span>Total:</span>
@@ -174,7 +183,18 @@ function abrirCarrito() {
 
     document.getElementById('cerrarCarrito').onclick = cerrarModal;
     document.getElementById('seguirComprando').onclick = cerrarModal;
-    document.getElementById('btnPagar').onclick = generarTicket;
+    document.getElementById('btnPagar').onclick = () => {
+        const inputCliente = document.getElementById('nombreClientePedido');
+        const nombreCliente = inputCliente ? inputCliente.value.trim() : '';
+
+        if (!nombreCliente) {
+            alert('Escribe tu nombre para identificar tu pedido.');
+            if (inputCliente) inputCliente.focus();
+            return;
+        }
+
+        generarTicket(nombreCliente);
+    };
 
     modal.querySelectorAll('[data-accion]').forEach(boton => {
         boton.onclick = () => {
@@ -190,7 +210,7 @@ function abrirCarrito() {
     modal.style.display = 'flex';
 }
 
-function generarTicket() {
+function generarTicket(nombreCliente) {
     if (carrito.length === 0) return;
 
     const pedido = 'PEDIDO-#' + Math.floor(100000000 + Math.random() * 900000000);
@@ -203,6 +223,7 @@ function generarTicket() {
 
     const nuevoPedido = {
         id: pedido,
+        cliente: nombreCliente,
         fecha: fecha,
         productos: productosComprados,
         total: total,
@@ -222,6 +243,7 @@ function generarTicket() {
             </div>
 
             <div class="ticket-datos">
+                <p><strong>Cliente:</strong> ${nombreCliente}</p>
                 <p>Fecha: ${fecha}</p>
                 <p>Estado: Pendiente</p>
             </div>
@@ -247,7 +269,7 @@ function generarTicket() {
                 <strong>$${total.toFixed(2)} MXN</strong>
             </div>
 
-            <p class="ticket-gracias">¡Gracias por tu compra!</p>
+            <p class="ticket-gracias">¡Gracias por tu compra, ${nombreCliente}!</p>
 
             <div class="acciones-ticket">
                 <button type="button" id="btnTerminar">Finalizar</button>

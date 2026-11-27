@@ -16,7 +16,8 @@ function mostrarPedidos() {
     const texto = buscador.value.trim().toLowerCase();
 
     const filtrados = pendientes.filter(pedido =>
-        pedido.id.toLowerCase().includes(texto)
+        pedido.id.toLowerCase().includes(texto) ||
+        String(pedido.cliente || '').toLowerCase().includes(texto)
     );
 
     contadorPedidos.textContent =
@@ -46,6 +47,11 @@ function mostrarPedidos() {
                 </div>
 
                 <span class="estado-pedido">${pedido.estado}</span>
+            </div>
+
+            <div class="cliente-pedido">
+                <span>Llamar a</span>
+                <strong>${pedido.cliente || 'Sin nombre'}</strong>
             </div>
 
             <p class="fecha-pedido">Fecha: ${pedido.fecha}</p>

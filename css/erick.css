@@ -530,15 +530,15 @@ header nav img:hover {
 
 #modal #mEliminar,
 #modal .btn-del {
-    background-color: var(--rojo);
-    color: white;
-    border-color: var(--rojo);
+    background-color: #ffffff;
+    color: #140f0c;
+    border-color: var(--acento-2);
 }
 
 #modal #mEliminar:hover,
 #modal .btn-del:hover {
-    filter: brightness(0.85);
-    border-color: var(--rojo);
+    filter: brightness(0.94);
+    border-color: var(--acento);
 }
 
 /* Botones del formulario */
@@ -633,10 +633,10 @@ header nav img:hover {
     min-height: 2.7rem;
     padding: 0.65rem 1.2rem;
 
-    background-color: var(--rojo) !important;
-    color: white !important;
+    background-color: #ffffff !important;
+    color: #140f0c !important;
 
-    border: 1px solid var(--rojo) !important;
+    border: 1px solid var(--acento-2) !important;
     border-radius: 0.7rem;
 
     font-family: inherit;
@@ -648,7 +648,7 @@ header nav img:hover {
 }
 
 .producto .btn-del:hover {
-    filter: brightness(0.85);
+    filter: brightness(0.94);
     transform: translateY(-2px);
 }
 
@@ -837,8 +837,51 @@ header nav img:hover {
     font-size: .75rem !important;
 }
 
+/* Campo de nombre del cliente en la cesta */
+
+.campo-nombre-pedido {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    margin-top: 1rem;
+    padding: 0.85rem 1rem;
+    background-color: var(--bg-color);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0.8rem;
+}
+
+.campo-nombre-pedido label {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--acento-2);
+}
+
+.campo-nombre-pedido input {
+    width: 100%;
+    min-width: 0;
+    padding: 0.65rem 0.9rem;
+    background-color: var(--bg-sec);
+    color: var(--fc-color);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 0.65rem;
+    font-family: inherit;
+    font-size: 0.92rem;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.campo-nombre-pedido input::placeholder {
+    color: var(--fc-color);
+    opacity: 0.5;
+}
+
+.campo-nombre-pedido input:focus {
+    border-color: var(--acento);
+    box-shadow: 0 0 0 3px rgba(166, 124, 82, 0.2);
+}
+
 .pie-carrito {
-    margin-top: 1.5rem;
+    margin-top: 1.2rem;
     border-top: 1px solid rgba(255,255,255,.15);
     padding-top: 1rem;
 }
