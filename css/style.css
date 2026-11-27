@@ -11,6 +11,11 @@
     margin: 0;
 }
 
+::selection {
+    background-color: var(--acento);
+    color: var(--bg-color);
+}
+
 html {
     font-family: "Inter", sans-serif; /* Fuente a usar en la web */
     font-size: var(--tFGeneral); /* Tamaño base para usar rem */
